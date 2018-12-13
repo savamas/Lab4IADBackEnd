@@ -8,7 +8,6 @@ import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
@@ -22,7 +21,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import javax.xml.namespace.QName;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.time.LocalDateTime;
@@ -48,6 +46,8 @@ public class UserAuthenticationResource {
     @Inject
     private KeyGenerator keyGenerator;
 
+    private static Person currentPerson = null;
+
     @POST
     @Path("/authenticate")
     public Response login(String content) throws UnsupportedEncodingException {
@@ -56,10 +56,10 @@ public class UserAuthenticationResource {
         String password = authorizationParams.get("password");
 
         JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("error", "Username or password is incorrect");
-        accountManager.addUser(new Person("xui", "SOBAKA", "EWD", "WQD"));
 
         if (accountManager.checkPassword(username, password)) {
+            currentPerson = accountManager.findByUsername(username);
+
             String token = issueToken(username);
 
             jsonObjectResponse.put("loginStatus", "OK");
@@ -101,7 +101,13 @@ public class UserAuthenticationResource {
             jsonObjectResponse.put("y", hit.getY());
             jsonObjectResponse.put("r", hit.getR());
 
-            if (accountManager.checkHit(hit.getX(), hit.getY(), hit.getR())) {
+            try {
+                System.out.println(currentPerson.getUsername());
+            } catch (NullPointerException e) {
+                System.out.println("Pizda XUI SKOVORODA!");
+            }
+
+            if (accountManager.checkHit(hit.getX(), hit.getY(), hit.getR(), currentPerson)) {
                 jsonObjectResponse.put("isInArea", "Yes");
             } else {
                 jsonObjectResponse.put("isInArea", "No");
@@ -113,7 +119,7 @@ public class UserAuthenticationResource {
     @GET
     @Path("/hits")
     public Response allHits() {
-        List<Hit> all = this.accountManager.findAllHits();
+        List<Hit> all = this.accountManager.findAllUsersHits(currentPerson);
 
         if (all == null || all.isEmpty()) {
             return Response.noContent().build();

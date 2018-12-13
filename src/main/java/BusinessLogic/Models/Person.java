@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class Person {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     @Column(unique = true)
     private String username;

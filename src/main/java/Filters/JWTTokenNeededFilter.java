@@ -32,13 +32,9 @@ public class JWTTokenNeededFilter implements ContainerRequestFilter {
 
         try {
             Key key = this.keyGenerator.generateKey();
-         //  Key key = "Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=".getBytes("UTF-8");
             Jwts.parser().setSigningKey(key).parseClaimsJws(token);
-            System.out.println("Valid token: " + token);
         } catch (Exception e) {
-            System.out.println("Invalid token: " + token);
             containerRequestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-
         }
     }
 }

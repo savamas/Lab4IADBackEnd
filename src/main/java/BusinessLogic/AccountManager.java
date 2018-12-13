@@ -10,10 +10,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import java.util.List;
 
 @Stateless
 public class AccountManager {
+
 
     @PersistenceContext(unitName = "personUnit")
     private EntityManager entityManager;
@@ -59,21 +62,23 @@ public class AccountManager {
         this.entityManager.persist(person);
     }
 
-    public boolean checkHit(double x, double y ,double r) {
+    public boolean checkHit(double x, double y ,double r, Person currentPerson) {
         boolean isInArea = checker.check(x, y, r);
         if (isInArea) {
-            this.entityManager.persist(new Hit(x, y, r, "Yes"));
+            this.entityManager.persist(new Hit(x, y, r, "Yes", currentPerson));
         } else {
-            this.entityManager.persist(new Hit(x, y, r, "No"));
+            this.entityManager.persist(new Hit(x, y, r, "No", currentPerson));
         }
         return isInArea;
     }
 
-    public List<Hit> findAllHits() {
+    public List<Hit> findAllUsersHits(Person person) {
         try {
-            return this.entityManager.createNamedQuery("Hit.FindAll", Hit.class).getResultList();
+            return this.entityManager.createNamedQuery("Hit.FindByUsername", Hit.class)
+            .setParameter("person_id", person).getResultList();
         } catch (NoResultException e) {
             return null;
         }
     }
+
 }
