@@ -1,21 +1,16 @@
 package Resources;
 
 import BusinessLogic.AccountManager;
-import BusinessLogic.Models.Hit;
 import BusinessLogic.Models.Person;
-import interfaces.JWTTokenNeeded;
 import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
 import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -26,7 +21,6 @@ import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @Path("/users")
@@ -46,12 +40,14 @@ public class UserAuthenticationResource {
     @Inject
     private KeyGenerator keyGenerator;
 
+    @Getter
     private static Person currentPerson = null;
 
     @POST
     @Path("/authenticate")
     public Response login(String content) throws UnsupportedEncodingException {
         Map<String, String> authorizationParams = parser.extractParams(content);
+
         String username = authorizationParams.get("username");
         String password = authorizationParams.get("password");
 
@@ -87,54 +83,48 @@ public class UserAuthenticationResource {
 
         return Response.ok().entity(jsonObjectResponse).build();
     }
-
-    @POST
-    @Path("/check")
-    @JWTTokenNeeded
-    public Response checkHit(Hit hit) {
-        JSONObject jsonObjectResponse = new JSONObject();
-
-        if (hit.getR() <= 0) {
-            jsonObjectResponse.put("error", "Radius is not positive!");
-        } else {
-            jsonObjectResponse.put("x", hit.getX());
-            jsonObjectResponse.put("y", hit.getY());
-            jsonObjectResponse.put("r", hit.getR());
-
-            try {
-                System.out.println(currentPerson.getUsername());
-            } catch (NullPointerException e) {
-                System.out.println("Pizda XUI SKOVORODA!");
-            }
-
-            if (accountManager.checkHit(hit.getX(), hit.getY(), hit.getR(), currentPerson)) {
-                jsonObjectResponse.put("isInArea", "Yes");
-            } else {
-                jsonObjectResponse.put("isInArea", "No");
-            }
-        }
-        return Response.ok().entity(jsonObjectResponse).build();
-    }
-
-    @GET
-    @Path("/hits")
-    public Response allHits() {
-        List<Hit> all = this.accountManager.findAllUsersHits(currentPerson);
-
-        if (all == null || all.isEmpty()) {
-            return Response.noContent().build();
-        }
-
-        JsonArray data = all.stream()
-                .map(this::toJson)
-                .collect(
-                        Json::createArrayBuilder,
-                        JsonArrayBuilder::add,
-                        JsonArrayBuilder::add
-                ).build();
-
-        return Response.ok().entity(data).build();
-    }
+//
+//    @POST
+//    @Path("/check")
+//    @JWTTokenNeeded
+//    public Response checkHit(Hit hit) {
+//        JSONObject jsonObjectResponse = new JSONObject();
+//
+//        if (hit.getR() <= 0) {
+//            jsonObjectResponse.put("error", "Radius is not positive!");
+//        } else {
+//            jsonObjectResponse.put("x", hit.getX());
+//            jsonObjectResponse.put("y", hit.getY());
+//            jsonObjectResponse.put("r", hit.getR());
+//
+//            if (accountManager.checkHit(hit.getX(), hit.getY(), hit.getR(), currentPerson)) {
+//                jsonObjectResponse.put("isInArea", "Yes");
+//            } else {
+//                jsonObjectResponse.put("isInArea", "No");
+//            }
+//        }
+//        return Response.ok().entity(jsonObjectResponse).build();
+//    }
+//
+//    @GET
+//    @Path("/hits")
+//    public Response allHits() {
+//        List<Hit> all = this.accountManager.findAllUsersHits(currentPerson);
+//
+//        if (all == null || all.isEmpty()) {
+//            return Response.noContent().build();
+//        }
+//
+//        JsonArray data = all.stream()
+//                .map(this::toJson)
+//                .collect(
+//                        Json::createArrayBuilder,
+//                        JsonArrayBuilder::add,
+//                        JsonArrayBuilder::add
+//                ).build();
+//
+//        return Response.ok().entity(data).build();
+//    }
 
     private String issueToken(String login) throws UnsupportedEncodingException {
         Key key = keyGenerator.generateKey();
@@ -147,15 +137,15 @@ public class UserAuthenticationResource {
                 .compact();
         return jwtToken;
     }
-
-    private JsonObject toJson(Hit hit) {
-        return Json.createObjectBuilder()
-                .add("x", hit.getX())
-                .add("y", hit.getY())
-                .add("r", hit.getR())
-                .add("isInArea", hit.getIsInArea()
-                ).build();
-    }
+//
+//    private JsonObject toJson(Hit hit) {
+//        return Json.createObjectBuilder()
+//                .add("x", hit.getX())
+//                .add("y", hit.getY())
+//                .add("r", hit.getR())
+//                .add("isInArea", hit.getIsInArea()
+//                ).build();
+//    }
 
     private Date toDate(LocalDateTime localDateTime) {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());

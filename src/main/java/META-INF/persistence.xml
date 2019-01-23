@@ -4,7 +4,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/__lab4</jta-data-source>
         <class>BusinessLogic.Models.Person</class>
-        <class>BusinessLogic.Models.Hit</class>
+        <!--<class>BusinessLogic.Models.Hit</class>-->
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
