@@ -20,7 +20,6 @@ public class Property {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
-    @Column(unique = true)
     private String name;
     private String value;
 

@@ -6,9 +6,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="resources/js/cart.js"></script>
+    <script type="text/javascript" src="resources/js/acount.js"></script>
 </head>
 <body style="background-color: #FFF6F5">
+
 <nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
     <a class="navbar-brand" href="index.jsp">Выдержка</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,18 +23,35 @@
             <li class="nav-item">
                 <a class="nav-link" href="login.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Войти</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="about.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Справка</a>
-            </li>
             <li class="nav-item active">
-                <a class="nav-link" href="cart.jsp" style="color: #FFF2CD; font-family: Rockwell; font-size: 25px;">Корзина</a>
+                <a class="nav-link" href="about.jsp" style="color: #FFF2CD; font-family: Rockwell; font-size: 25px;">Справка</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>
             </li>
             <li class="nav-item" id="onlyForLoggedUsers">
-                <%--<a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>--%>
+                <a class="nav-link" href="account.jsp" style="color: #FFF2CD; font-family: Rockwell; font-size: 25px;">Личный кабинет</a>
             </li>
         </ul>
     </div>
 </nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card" style="width: 500px; text-align: center">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <button type="button" class="btn btn-danger" id="leaveAccount" style="margin: 20px; text-align: center">Выйти</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            One of three columns
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -1,7 +1,10 @@
 $('document').ready(function () {
-    document.getElementById("loginFormSubmit").onsubmit = function() {
 
-      //  $("#loginAlert").remove();
+    if (window.localStorage.getItem('token') !== null) {
+        document.getElementById('onlyForLoggedUsers').innerHTML = "<a class=\"nav-link\" href=\"account.jsp\" style=\"color: #F3ECD6; font-family: Rockwell; font-size: 25px;\">Личный кабинет</a>";
+    }
+
+    document.getElementById("loginFormSubmit").onsubmit = function() {
 
         var params = {
             username: $("#userEmail").val(),
@@ -18,6 +21,8 @@ $('document').ready(function () {
                     $("#loginAlert").append("<div class=\"alert alert-success\" role=\"alert\">\n" +
                         "  Authorization successful!\n" +
                         "</div>");
+                    window.localStorage.setItem('token', data.token);
+                    window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/index.jsp";
                 } else {
                     $("#loginAlert").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
                         "  Incorrect username or login!\n" +

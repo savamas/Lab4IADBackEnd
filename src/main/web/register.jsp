@@ -30,6 +30,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>
             </li>
+            <li class="nav-item" id="onlyForLoggedUsers">
+                <%--<a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>--%>
+            </li>
         </ul>
     </div>
 </nav>

@@ -67,12 +67,12 @@ public class OrderResource {
         OrderEnt ord = orderService.findOrder(orderId);
 
         boolean needUpdates = false;
-        if (ord.getDeliveryStatus() != newDeliveryStatus){
+        if (ord.getDeliveryStatus().equals(newDeliveryStatus)){
             orderService.setDeliveryStatus(newDeliveryStatus, ord);
             needUpdates = true;
         }
 
-        if (ord.getPaymentStatus() != newPaymentStatus){
+        if (ord.getPaymentStatus().equals(newPaymentStatus)){
             orderService.setPaymentStatus(newPaymentStatus, ord);
             needUpdates = true;
         }

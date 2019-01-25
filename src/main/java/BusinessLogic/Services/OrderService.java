@@ -5,6 +5,7 @@ import BusinessLogic.Models.OrderItem;
 import BusinessLogic.Models.Person;
 import lombok.Data;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.Order;

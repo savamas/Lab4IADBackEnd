@@ -3,8 +3,16 @@
     <persistence-unit name="personUnit" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/__lab4</jta-data-source>
+        <class>BusinessLogic.Models.Employee</class>
+        <class>BusinessLogic.Models.ItemCategory</class>
+        <class>BusinessLogic.Models.ItemType</class>
+        <class>BusinessLogic.Models.Joint</class>
+        <class>BusinessLogic.Models.OrderEnt</class>
+        <class>BusinessLogic.Models.OrderItem</class>
         <class>BusinessLogic.Models.Person</class>
-        <!--<class>BusinessLogic.Models.Hit</class>-->
+        <class>BusinessLogic.Models.Property</class>
+        <class>BusinessLogic.Models.RequestedItem</class>
+        <class>BusinessLogic.Models.TypeInJoint</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
