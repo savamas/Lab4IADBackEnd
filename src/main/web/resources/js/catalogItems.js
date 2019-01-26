@@ -33,6 +33,6 @@ $('document').ready(function () {
             }
         })
         .fail(function () {
-            console.log("Failed 4");
+            console.log("Failed");
         })
 });
