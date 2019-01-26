@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
 
 @XmlRootElement
 @NoArgsConstructor
@@ -24,9 +23,4 @@ public class ItemCategory {
     @Column(unique = true)
     private String name;
     private String imageUrl;
-    @OneToMany(mappedBy = "category")
-    private Collection<ItemType> itemTypeCollection;
-
-
-
 }

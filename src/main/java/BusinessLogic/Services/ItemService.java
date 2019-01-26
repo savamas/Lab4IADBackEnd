@@ -54,6 +54,7 @@ public class ItemService {
     public List<FilterSetting> getFiltersByCategoryId(int categoryId){
         List<Property> properties = entityManager.createQuery("select DISTINCT p from Property p where p.itemType.category.Id ="+categoryId).getResultList();
         List<FilterSetting> filters = new LinkedList<>();
+        System.out.println("TATATATA");
 
 
 
@@ -62,10 +63,13 @@ public class ItemService {
         Iterator<Property> itr = properties.listIterator();
         while(itr.hasNext()) {
             FilterSetting filter = new FilterSetting();
+            filter.setFilterValues(new LinkedList<>());
 
             boolean first = true;
             while(itr.hasNext()) {
                 Property prop = itr.next();
+                if(prop == null)
+                    break;
                 if (first) {
 
                     first = false;
@@ -73,12 +77,13 @@ public class ItemService {
                 }
 
                 if(prop.getName().equals(filter.getFilterName())) {
-                    filter.getFilterValues().add(prop.getValue());
+                    filter.addValue(prop.getValue());
                     itr.remove();
                 }
 
             }
             filters.add(filter);
+            itr = properties.listIterator();
         }
         return  filters;
     }

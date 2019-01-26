@@ -13,8 +13,8 @@
         <class>BusinessLogic.Models.Property</class>
         <class>BusinessLogic.Models.RequestedItem</class>
         <class>BusinessLogic.Models.TypeInJoint</class>
-        <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-        </properties>
+        <!--<properties>-->
+            <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
+        <!--</properties>-->
     </persistence-unit>
 </persistence>

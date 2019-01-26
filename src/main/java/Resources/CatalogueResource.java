@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Path("/catalogue")
@@ -59,6 +60,10 @@ public class CatalogueResource {
     @Path("/getCategories")
     public  Response getCategories()
     {
+//        itemService.addCategory("Камеры", "CameraType.jpg");
+//        itemService.addCategory("Оборудование", "EquipmentType.jpg");
+//        itemService.addCategory("Локации", "LocationType.jpg");
+//        itemService.addCategory("Реквизит", "PropsType.jpg");
         Gson gson = new Gson();
         return Response.ok().entity(gson.toJson(itemService.getDistinctCategories())).build();
     }
@@ -68,11 +73,14 @@ public class CatalogueResource {
     public Response getFilter(String content)
     {
         Gson gson = new Gson();
-        Map<String, String> category = parser.extractParams(content);
-        String categoryId = category.get("category");
-        LinkedList<FilterSetting> items = (LinkedList<FilterSetting>)itemService.getFiltersByCategoryId(Integer.valueOf(categoryId));
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement el = obj.get("category");
+
+        LinkedList<FilterSetting> items = (LinkedList<FilterSetting>)itemService.getFiltersByCategoryId(el.getAsInt());
         return Response.ok().entity(gson.toJson(items)).build();
     }
-    
+
 
 }

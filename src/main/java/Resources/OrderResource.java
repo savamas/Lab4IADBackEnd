@@ -13,7 +13,6 @@ import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;

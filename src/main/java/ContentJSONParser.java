@@ -20,6 +20,7 @@ public class ContentJSONParser implements Parsabale {
 
         params.put("username", (String) jsonObject.get("username"));
         params.put("password", (String) jsonObject.get("password"));
+        params.put("category", (String) jsonObject.get("category"));
 
         return params;
     }
