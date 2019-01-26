@@ -53,20 +53,12 @@
             <div id="listOfFilters"></div>
             <button type="button" class="btn btn-success" id="filter" style="margin: 20px; text-align: center">Найти</button>
         </div>
-        <div class="col-9">Column</div>
+        <div class="col-9">
+            <ul class="list-unstyled" id="filteredItems">
+            </ul>
+        </div>
     </div>
 </div>
-
-<%--<div class="dropdown">--%>
-    <%--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-        <%--Dropdown button--%>
-    <%--</button>--%>
-    <%--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--%>
-        <%--<a class="dropdown-item" href="#">Action</a>--%>
-        <%--<a class="dropdown-item" href="#">Another action</a>--%>
-        <%--<a class="dropdown-item" href="#">Something else here</a>--%>
-    <%--</div>--%>
-<%--</div>--%>
 
 </body>
 </html>

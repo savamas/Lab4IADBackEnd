@@ -19,7 +19,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 @Path("/catalogue")
@@ -47,12 +46,12 @@ public class CatalogueResource {
     @POST
     @Path("/getItems")
     public Response getItems(String content){
-
-
         Gson gson = new Gson();
-        Map<String, String> category  = parser.extractParams(content);
-        String categoryId = category.get("category");
-        LinkedList<ItemType> items = (LinkedList<ItemType>)itemService.getItemsByCategory(Integer.valueOf(categoryId));
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement el = obj.get("category");
+        LinkedList<ItemType> items = (LinkedList<ItemType>)itemService.getItemsByCategory(el.getAsInt());
         return Response.ok().entity(gson.toJson(items)).build();
     }
 
@@ -60,11 +59,9 @@ public class CatalogueResource {
     @Path("/getCategories")
     public  Response getCategories()
     {
-//        itemService.addCategory("Камеры", "CameraType.jpg");
-//        itemService.addCategory("Оборудование", "EquipmentType.jpg");
-//        itemService.addCategory("Локации", "LocationType.jpg");
-//        itemService.addCategory("Реквизит", "PropsType.jpg");
         Gson gson = new Gson();
+
+
         return Response.ok().entity(gson.toJson(itemService.getDistinctCategories())).build();
     }
 
@@ -82,5 +79,22 @@ public class CatalogueResource {
         return Response.ok().entity(gson.toJson(items)).build();
     }
 
+    @POST
+    @Path("/getFilteredItems")
+    public Response getFilteredItems(String content){
+
+
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement cat = obj.get("category");
+        JsonElement fil = obj.get("filters");
+        LinkedList<FilterSetting> filters = new LinkedList<>();
+        filters = (LinkedList<FilterSetting>) gson.fromJson(fil,filters.getClass());
+        LinkedList<ItemType> items = (LinkedList<ItemType>)itemService.getFilteredItems(cat.getAsInt(),filters);
+        return Response.ok().entity(gson.toJson(items)).build();
+    }
+    
 
 }
