@@ -47,14 +47,13 @@ public class ItemService {
         entityManager.getTransaction().commit();
     }
 
-    public  List<ItemCategory> getDistinctCategories(){
+    public List<ItemCategory> getDistinctCategories(){
         return (List<ItemCategory>)entityManager.createQuery("select DISTINCT c from ItemCategory c ").getResultList();
     }
 
     public List<FilterSetting> getFiltersByCategoryId(int categoryId){
         List<Property> properties = entityManager.createQuery("select DISTINCT p from Property p where p.itemType.category.Id ="+categoryId).getResultList();
         List<FilterSetting> filters = new LinkedList<>();
-        System.out.println("TATATATA");
 
 
 
@@ -92,7 +91,10 @@ public class ItemService {
 
     public List<ItemType> getItemsByCategory(int categoryId) {
 
-        return (List<ItemType>)entityManager.createQuery("select e from ItemType e where e.category.Id =" + categoryId).getResultList();
+
+        List<ItemType> list = entityManager.createQuery("select e from ItemType e where e.category.Id =" + categoryId).getResultList();
+
+        return list;
     }
 
 

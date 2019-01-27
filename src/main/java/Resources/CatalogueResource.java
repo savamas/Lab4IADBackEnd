@@ -7,6 +7,7 @@ import BusinessLogic.Services.MailService;
 import BusinessLogic.Services.OrderService;
 import com.google.gson.*;
 import interfaces.Parsabale;
+import org.omg.CORBA.Object;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -17,8 +18,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Path("/catalogue")
@@ -46,13 +50,23 @@ public class CatalogueResource {
     @POST
     @Path("/getItems")
     public Response getItems(String content){
+
+
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         JsonElement elem = jsonParser.parse(content);
         JsonObject obj = elem.getAsJsonObject();
         JsonElement el = obj.get("category");
-        LinkedList<ItemType> items = (LinkedList<ItemType>)itemService.getItemsByCategory(el.getAsInt());
-        return Response.ok().entity(gson.toJson(items)).build();
+        List<ItemType> items = itemService.getItemsByCategory(el.getAsInt());
+        LinkedList<ItemTypeDTO> itemDTOs = new LinkedList<>();
+        for (ItemType item: items) {
+            ItemTypeDTO dto = new ItemTypeDTO();
+            dto.setName(item.getName());
+            dto.setUrl(item.getImageUrl());
+
+            itemDTOs.add(dto);
+        }
+        return Response.ok().entity(gson.toJson(itemDTOs)).build();
     }
 
     @GET
@@ -75,6 +89,7 @@ public class CatalogueResource {
         JsonObject obj = elem.getAsJsonObject();
         JsonElement el = obj.get("category");
 
+
         LinkedList<FilterSetting> items = (LinkedList<FilterSetting>)itemService.getFiltersByCategoryId(el.getAsInt());
         return Response.ok().entity(gson.toJson(items)).build();
     }
@@ -92,8 +107,18 @@ public class CatalogueResource {
         JsonElement fil = obj.get("filters");
         LinkedList<FilterSetting> filters = new LinkedList<>();
         filters = (LinkedList<FilterSetting>) gson.fromJson(fil,filters.getClass());
-        LinkedList<ItemType> items = (LinkedList<ItemType>)itemService.getFilteredItems(cat.getAsInt(),filters);
-        return Response.ok().entity(gson.toJson(items)).build();
+
+        List<ItemType> items = itemService.getFilteredItems(cat.getAsInt(),filters);
+        LinkedList<ItemTypeDTO> itemDTOs = new LinkedList<>();
+        for (ItemType item: items) {
+            ItemTypeDTO dto = new ItemTypeDTO();
+            dto.setName(item.getName());
+            dto.setUrl(item.getImageUrl());
+            itemDTOs.add(dto);
+        }
+
+
+        return Response.ok().entity(gson.toJson(itemDTOs)).build();
     }
     
 
