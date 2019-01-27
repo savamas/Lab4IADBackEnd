@@ -13,8 +13,8 @@ $('document').ready(function () {
         .done(function (data) {
             for (i = 0; i < data.length; i++) {
                 dataTmp[i] = data[i];
-                $('#listOfCategories').append('<div class="card">\n' +
-                    '    <img class="card-img-top" width="200" src="' + data[i].imageUrl + '" alt="Card image cap">\n' +
+                $('#listOfCategories').append('<div class="card" style="width: 18rem;">\n' +
+                    '    <img class="card-img-top" src="' + data[i].imageUrl + '" alt="Card image cap">\n' +
                     '    <div class="card-body" style="text-align: center; background-color: #FFF2CD; font-size: xx-large; font-style: oblique">\n' +
                     '      <a href="catalogItems.jsp" onClick="linkClicked(this.innerHTML)"><h2 class="card-title">' + data[i].name + '</h2></a>\n' +
                     '    </div>\n' +

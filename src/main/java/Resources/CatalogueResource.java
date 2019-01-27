@@ -6,6 +6,7 @@ import BusinessLogic.Services.ItemService;
 import BusinessLogic.Services.MailService;
 import BusinessLogic.Services.OrderService;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import interfaces.Parsabale;
 import org.omg.CORBA.Object;
 
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.awt.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -98,20 +100,21 @@ public class CatalogueResource {
     @Path("/getFilteredItems")
     public Response getFilteredItems(String content){
 
-
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         JsonElement elem = jsonParser.parse(content);
         JsonObject obj = elem.getAsJsonObject();
         JsonElement cat = obj.get("category");
         JsonElement fil = obj.get("filters");
-        LinkedList<FilterSetting> filters = new LinkedList<>();
-        filters = (LinkedList<FilterSetting>) gson.fromJson(fil,filters.getClass());
+        List<FilterSetting> filters;
+        Type type = new TypeToken<List<FilterSetting>>(){}.getType();
+        filters = gson.fromJson(fil, type);
 
         List<ItemType> items = itemService.getFilteredItems(cat.getAsInt(),filters);
         LinkedList<ItemTypeDTO> itemDTOs = new LinkedList<>();
         for (ItemType item: items) {
             ItemTypeDTO dto = new ItemTypeDTO();
+            int i;
             dto.setName(item.getName());
             dto.setUrl(item.getImageUrl());
             itemDTOs.add(dto);

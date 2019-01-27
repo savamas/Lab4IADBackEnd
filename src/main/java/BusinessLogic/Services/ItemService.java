@@ -98,10 +98,10 @@ public class ItemService {
     }
 
 
-    public List<ItemType> getFilteredItems(int categoryId, LinkedList<FilterSetting> filters){
+    public List<ItemType> getFilteredItems(int categoryId, List<FilterSetting> filters){
 
         List<ItemType> types = entityManager.createQuery("select e from ItemType e where e.category.Id ="+categoryId).getResultList();
-        LinkedList<ItemType> result = new LinkedList<>();
+        ArrayList<ItemType> result = new ArrayList<>();
 
 
         for (ItemType type : types) {
@@ -109,7 +109,7 @@ public class ItemService {
             boolean nextType = false;
 
 
-            LinkedList<Property> properties = (LinkedList<Property>)type.getPropertyCollection();
+            Collection<Property> properties = type.getPropertyCollection();
 
 
             if(!nextType) {

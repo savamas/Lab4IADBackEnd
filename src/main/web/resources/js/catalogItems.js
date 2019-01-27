@@ -1,4 +1,4 @@
-var filtersMain = '"filters":{';
+var filtersMain = '"filters":[';
 var filterParams = [];
 
 $('document').ready(function () {
@@ -33,10 +33,10 @@ $('document').ready(function () {
                     data[i].filterName +
                     '  </button>\n' + str +
                 '</div>');
-                filtersMain = filtersMain + '"' + data[i].filterName + '":[],';
+                filtersMain = filtersMain + '{"filterName":"' + data[i].filterName + '","filterValues":[]},';
             }
             filtersMain = filtersMain.substring(0, filtersMain.length - 1);
-            filtersMain = filtersMain + "}";
+            filtersMain = filtersMain + "]";
         })
         .fail(function () {
             console.log("Failed");
@@ -116,7 +116,7 @@ function test(e) {
     var str = filterParams[filterName];
     str = str.replace(/X/g, '"');
 
-    filtersMain = filtersMain.slice(0, filtersMain.indexOf(filterName) + 3 + filterName.length) + filtersMain.slice(filtersMain.indexOf(filterName) + 3 + filterName.length + previousLength);
+    filtersMain = filtersMain.slice(0, filtersMain.indexOf(filterName) + 18 + filterName.length) + filtersMain.slice(filtersMain.indexOf(filterName) + 18 + filterName.length + previousLength);
 
-    filtersMain = filtersMain.slice(0, filtersMain.indexOf(filterName) + 3 + filterName.length) + str + filtersMain.slice(filtersMain.indexOf(filterName) + 3 + filterName.length);
+    filtersMain = filtersMain.slice(0, filtersMain.indexOf(filterName) + 18 + filterName.length) + str + filtersMain.slice(filtersMain.indexOf(filterName) + 18 + filterName.length);
 }
