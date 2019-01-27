@@ -63,6 +63,8 @@ $('document').ready(function () {
         })
 
     $( "#filter" ).click(function() {
+        $("#filteredItems").empty();
+
         var sendData = '{"category":"' + window.localStorage.getItem('selectedCategoryId') + '",' + filtersMain + '}';
 
         $.ajax({

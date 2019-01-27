@@ -9,7 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ItemTypeDTO {
 
+    int id;
     String name;
     String url;
+    Double price;
 
 }

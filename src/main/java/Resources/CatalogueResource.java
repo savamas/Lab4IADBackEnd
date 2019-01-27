@@ -65,7 +65,8 @@ public class CatalogueResource {
             ItemTypeDTO dto = new ItemTypeDTO();
             dto.setName(item.getName());
             dto.setUrl(item.getImageUrl());
-
+            dto.setId(item.getId());
+            dto.setPrice(item.getPrice());
             itemDTOs.add(dto);
         }
         return Response.ok().entity(gson.toJson(itemDTOs)).build();
@@ -117,6 +118,8 @@ public class CatalogueResource {
             int i;
             dto.setName(item.getName());
             dto.setUrl(item.getImageUrl());
+            dto.setId(item.getId());
+            dto.setPrice(item.getPrice());
             itemDTOs.add(dto);
         }
 

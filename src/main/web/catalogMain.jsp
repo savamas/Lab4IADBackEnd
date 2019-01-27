@@ -34,10 +34,6 @@
                 <%--<a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>--%>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
-        </form>
 
     </div>
 </nav>

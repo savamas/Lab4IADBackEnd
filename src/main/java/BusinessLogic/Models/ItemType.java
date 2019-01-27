@@ -23,6 +23,7 @@ public class ItemType {
     @Column(unique = true)
     private String name;
     private String imageUrl;
+    private double price;
     @OneToMany(mappedBy = "itemType")
     private Collection<Property> propertyCollection;
     @ManyToOne
