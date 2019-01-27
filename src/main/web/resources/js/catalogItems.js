@@ -53,7 +53,7 @@ $('document').ready(function () {
                 $('#filteredItems').append('<li class="media">\n' +
                     '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
                     '                    <div class="media-body">\n' +
-                    '                        <h5 class="mt-0 mb-1">' + data[i].name +  '</h5>\n' +
+                    '                        <a href="#"><h5 class="mt-0 mb-1">' + data[i].name +  '</h5></a>\n' +
                     '                    </div>\n' +
                     '                </li>');
             }
@@ -66,6 +66,32 @@ $('document').ready(function () {
         $("#filteredItems").empty();
 
         var sendData = '{"category":"' + window.localStorage.getItem('selectedCategoryId') + '",' + filtersMain + '}';
+
+        var ob = JSON.parse(sendData);
+
+        var tmpFilters = ob.filters;
+
+        var count;
+
+        do {
+            count = 0;
+            for (i = 0; i < tmpFilters.length; i++) {
+                if (tmpFilters[i].filterValues.length == 0) {
+                    count++;
+                    tmpFilters.splice(i, 1);
+                }
+            }
+        } while(count != 0);
+
+        for (i = 0; i < tmpFilters.length; i++) {
+            if (tmpFilters[i].filterValues.length == 0) {
+                tmpFilters.splice(i, 1);
+            }
+        }
+
+        ob.filters = tmpFilters;
+
+        sendData = JSON.stringify(ob);
 
         $.ajax({
             method: "POST",
@@ -122,3 +148,7 @@ function test(e) {
 
     filtersMain = filtersMain.slice(0, filtersMain.indexOf(filterName) + 18 + filterName.length) + str + filtersMain.slice(filtersMain.indexOf(filterName) + 18 + filterName.length);
 }
+
+// function itemClicked() {
+//
+// }
