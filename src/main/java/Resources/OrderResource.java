@@ -16,10 +16,7 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -120,13 +117,15 @@ public class OrderResource {
 
     @POST
     @Path("/addToCart")
-    public Response setStatuses(String content, @Context HttpServletRequest request, @Context HttpSession session){
-        if (session != null){
-            session = request.getSession();
+    public Response setStatuses(String content, @Context HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        if (session.isNew()){
             Collection<OrderItem> items = new LinkedList<>();
             session.setAttribute("items", items);
+
         }
-        Gson gson = new Gson();
+
         JsonParser jsonParser = new JsonParser();
         JsonElement elem = jsonParser.parse(content);
         JsonObject obj = elem.getAsJsonObject();
@@ -150,8 +149,9 @@ try {
         addition.setStartDate(newDate);
         LinkedList newItems = (LinkedList<OrderItem>)session.getAttribute("items");
         newItems.add(addition);
+
         session.setAttribute("items",newItems);
-        return Response.ok().build();
+        return Response.ok().entity(((LinkedList<OrderItem>) session.getAttribute("items")).size()).build();
     }
 
     @POST

@@ -33,38 +33,22 @@
                 <a class="nav-link" href="cart.jsp" style="color: #FFF2CD; font-family: Rockwell; font-size: 25px;">Корзина</a>
             </li>
             <li class="nav-item" id="onlyForLoggedUsers">
-                <%--<a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>--%>
             </li>
         </ul>
     </div>
 </nav>
 
-<%--<div class="container">--%>
-    <%--<div class="row">--%>
-        <%--<div class="col-sm-6">--%>
-            <%--<div class="form-group">--%>
-                <%--<div class="input-group date" id="datetimepicker4" data-target-input="nearest">--%>
-                    <%--<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>--%>
-                    <%--<div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">--%>
-                        <%--<div class="input-group-text"><i class="fa fa-calendar"></i></div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<script type="text/javascript">--%>
-            <%--$(function () {--%>
-                <%--var bum = [];--%>
-                <%--for (i = 0; i < bookedDates.length; i++){--%>
-                    <%--bum[i] = moment(bookedDates[i]);--%>
-                <%--}--%>
-                <%--$('#datetimepicker4').datetimepicker({--%>
-                    <%--format: 'L',--%>
-                    <%--disabledDates: bum--%>
-                <%--});--%>
-            <%--});--%>
-        <%--</script>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div class="container-fluid" style="margin: 20px">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1>Ваши заказы:</h1>
+            <ul class="list-unstyled" id="itemsInCart">
+            </ul>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
 </body>
 </html>
