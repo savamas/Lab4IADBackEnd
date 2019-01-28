@@ -1,5 +1,6 @@
 var filtersMain = '"filters":[';
 var filterParams = [];
+var dataToSave = [];
 
 $('document').ready(function () {
     if (window.localStorage.getItem('token') !== null) {
@@ -49,11 +50,14 @@ $('document').ready(function () {
         contentType: "application/json; charset=utf-8"
     })
         .done(function (data) {
+            dataToSave = [];
             for (i = 0; i < data.length; i++) {
+                dataToSave[i] = data[i];
                 $('#filteredItems').append('<li class="media">\n' +
                     '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
                     '                    <div class="media-body">\n' +
-                    '                        <a href="#"><h5 class="mt-0 mb-1">' + data[i].name +  '</h5></a>\n' +
+                    '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
+                    '                        Стоимость: ' + data[i].price +  '\n' +
                     '                    </div>\n' +
                     '                </li>');
             }
@@ -61,6 +65,38 @@ $('document').ready(function () {
         .fail(function () {
             console.log("Failed");
         })
+
+    $("#search").click(function () {
+        $("#filteredItems").empty();
+        var queryTmp = $("#searchInput").val();
+        var sendQuery = {
+            category: window.localStorage.getItem('selectedCategoryId'),
+            query: queryTmp
+        };
+
+        $.ajax({
+            method: "POST",
+            url: "http://localhost:8080/Lab4IADBackEnd_Web_exploded/resource/catalogue/getSearchedItems",
+            data: JSON.stringify(sendQuery),
+            contentType: "application/json; charset=utf-8"
+        })
+            .done(function (data) {
+                dataToSave = [];
+                for (i = 0; i < data.length; i++) {
+                    dataToSave[i] = data[i];
+                    $('#filteredItems').append('<li class="media">\n' +
+                        '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                        '                    <div class="media-body">\n' +
+                        '                        <a href="concreteItem.jsp"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
+                        '                        Стоимость: ' + data[i].price +  '\n' +
+                        '                    </div>\n' +
+                        '                </li>');
+                }
+            })
+            .fail(function () {
+                console.log("Failed");
+            })
+    });
 
     $( "#filter" ).click(function() {
         $("#filteredItems").empty();
@@ -100,11 +136,14 @@ $('document').ready(function () {
             contentType: "application/json; charset=utf-8"
         })
             .done(function (data) {
+                dataToSave =[];
                 for (i = 0; i < data.length; i++) {
+                    dataToSave[i] = data[i];
                     $('#filteredItems').append('<li class="media">\n' +
                         '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
                         '                    <div class="media-body">\n' +
-                        '                        <h5 class="mt-0 mb-1">' + data[i].name +  '</h5>\n' +
+                        '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
+                        '                        Стоимость: ' + data[i].price +  '\n' +
                         '                    </div>\n' +
                         '                </li>');
                 }
@@ -149,6 +188,12 @@ function test(e) {
     filtersMain = filtersMain.slice(0, filtersMain.indexOf(filterName) + 18 + filterName.length) + str + filtersMain.slice(filtersMain.indexOf(filterName) + 18 + filterName.length);
 }
 
-// function itemClicked() {
-//
-// }
+function itemClicked(e) {
+    var res = e.substring(22);
+    res = res.substring(0, res.length - 5);
+    for (i = 0; i < dataToSave.length; i++) {
+        if (dataToSave[i].name == res) {
+            window.localStorage.setItem('selectedItemId', dataToSave[i].id);
+        }
+    }
+}

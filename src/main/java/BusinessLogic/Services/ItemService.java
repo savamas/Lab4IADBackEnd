@@ -164,6 +164,12 @@ public class ItemService {
     }
 
 
+    public List<ItemType> getSearchedItems(String query, int categoryId){
+        List<ItemType> list = entityManager.createQuery("select e from ItemType e where e.category.Id ="+categoryId+" AND e.name like '%" +query+ "%'" ).getResultList();
+        return list;
+    }
+
+
 
     public LinkedList<RequestedItem> getRequestedItems(){
         LinkedList<RequestedItem> requests = (LinkedList<RequestedItem>)entityManager.createQuery("select e from RequestedItem e");

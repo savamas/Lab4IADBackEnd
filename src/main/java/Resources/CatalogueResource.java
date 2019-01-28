@@ -126,6 +126,52 @@ public class CatalogueResource {
 
         return Response.ok().entity(gson.toJson(itemDTOs)).build();
     }
-    
+
+    @POST
+    @Path("/getSearchedItems")
+    public Response getSearchedItems(String content){
+
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement el = obj.get("query");
+        JsonElement cat= obj.get("category");
+
+        List<ItemType> list = itemService.getSearchedItems(el.getAsString(), cat.getAsInt());
+        LinkedList<ItemTypeDTO> itemDTOs = new LinkedList<>();
+        for (ItemType item: list) {
+            ItemTypeDTO dto = new ItemTypeDTO();
+            dto.setName(item.getName());
+            dto.setUrl(item.getImageUrl());
+            dto.setId(item.getId());
+            dto.setPrice(item.getPrice());
+            itemDTOs.add(dto);
+        }
+        return Response.ok().entity(gson.toJson(itemDTOs)).build();
+    }
+
+    @POST
+    @Path("/getItemById")
+    public Response getItemById(String content) {
+
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement el = obj.get("id");
+
+        ItemType item = itemService.getItemTypeById(el.getAsInt());
+
+        ItemTypeDTO dto = new ItemTypeDTO();
+        dto.setName(item.getName());
+        dto.setUrl(item.getImageUrl());
+        dto.setId(item.getId());
+        dto.setPrice(item.getPrice());
+
+
+        return Response.ok().entity(gson.toJson(dto)).build();
+    }
+
 
 }
