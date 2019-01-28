@@ -16,7 +16,7 @@ $('document').ready(function () {
     })
         .done(function (data) {
             for (i = 0; i < data.length; i++) {
-                $('#concreteItemShow').append('<div class="jumbotron">\n' +
+                $('#concreteItemShow').append('<div class="jumbotron" style="background-color: #FFF2CD">\n' +
                     '        <h1 class="display-4">Hello, world!</h1>\n' +
                     '        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>\n' +
                     '        <hr class="my-4">\n' +
