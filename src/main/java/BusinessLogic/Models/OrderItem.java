@@ -3,6 +3,7 @@ package BusinessLogic.Models;
 import lombok.Data;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement
 @Data
@@ -27,4 +28,6 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn
     private ItemType itemType;
+
+    private Date startDate;
 }

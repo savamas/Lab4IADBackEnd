@@ -21,11 +21,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.awt.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 @Path("/catalogue")
 @Produces(MediaType.APPLICATION_JSON)
@@ -170,6 +167,29 @@ public class CatalogueResource {
         dto.setPrice(item.getPrice());
 
         return Response.ok().entity(gson.toJson(dto)).build();
+    }
+
+    @GET
+    @Path("/getBookedDates")
+    public Response getBookedDates() {
+
+        Gson gson = new Gson();
+        List<String> strings = new LinkedList<>();
+        List<Date> dates = itemService.getBookedDates();
+        for (Date date : dates) {
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal.get(Calendar.YEAR);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String dayString = String.valueOf(day);
+            if(day<10)
+                dayString ="0"+day;
+            String string = month + "/" + dayString + "/" + year;
+            strings.add(string);
+        }
+        return Response.ok().entity(gson.toJson(strings)).build();
     }
 
 

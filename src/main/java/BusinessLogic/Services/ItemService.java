@@ -47,6 +47,29 @@ public class ItemService {
         entityManager.getTransaction().commit();
     }
 
+    public void addItemType(ItemType item){
+        entityManager.getTransaction().begin();
+        entityManager.persist(item);
+        entityManager.getTransaction().commit();
+    }
+
+    public void addCategory(ItemCategory item){
+        entityManager.getTransaction().begin();
+        entityManager.persist(item);
+        entityManager.getTransaction().commit();
+    }
+
+    public void addProperty(Property item){
+        entityManager.getTransaction().begin();
+        entityManager.persist(item);
+        entityManager.getTransaction().commit();
+    }
+
+    public List<Date> getBookedDates(){
+        return (List<Date>)entityManager.createQuery("select e.startDate from OrderItem e where e.itemType.category.Id = 2").getResultList();
+    }
+
+
     public List<ItemCategory> getDistinctCategories(){
         return (List<ItemCategory>)entityManager.createQuery("select DISTINCT c from ItemCategory c ").getResultList();
     }

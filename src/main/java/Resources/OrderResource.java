@@ -5,14 +5,12 @@ import BusinessLogic.Models.*;
 import BusinessLogic.Services.ItemService;
 import BusinessLogic.Services.MailService;
 import BusinessLogic.Services.OrderService;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -28,12 +26,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
@@ -43,10 +39,10 @@ public class OrderResource {
     @Context
     UriInfo uriInfo;
 
-    @Inject
+    @EJB
     private OrderService orderService;
 
-    @Inject
+    @EJB
     private ItemService itemService;
 
     @Inject
@@ -130,18 +126,28 @@ public class OrderResource {
             Collection<OrderItem> items = new LinkedList<>();
             session.setAttribute("items", items);
         }
-        Map<String, String> statusValues = parser.extractParams(content);
-        String id = statusValues.get("id");
-        String amount = statusValues.get("amount");
-        boolean rentStatus = Boolean.valueOf(statusValues.get("rentStatus"));
-        int rentDuration = Integer.valueOf(statusValues.get("rentDuration"));
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement id = obj.get("id");
+        JsonElement amount = obj.get("amount");
+        JsonElement date = obj.get("booking");
 
         OrderItem addition = new OrderItem();
-        addition.setItemType(itemService.getItemTypeById(Integer.valueOf(id)));
-        addition.setAmount(Integer.valueOf(amount));
-        addition.setRentDuration(rentDuration);
-        addition.setRentStatus(rentStatus);
+        addition.setItemType(itemService.getItemTypeById(id.getAsInt()));
+        addition.setAmount(amount.getAsInt());
+        String oldDate = date.getAsString();
+        SimpleDateFormat oldDateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        Date newDate = new Date();
+try {
 
+
+    newDate = oldDateFormat.parse(oldDate);
+}catch (Exception e){
+
+}
+        addition.setStartDate(newDate);
         LinkedList newItems = (LinkedList<OrderItem>)session.getAttribute("items");
         newItems.add(addition);
         session.setAttribute("items",newItems);

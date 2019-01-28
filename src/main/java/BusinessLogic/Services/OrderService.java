@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Stateless
 public class OrderService {
 
     @PersistenceContext(unitName = "personUnit")
