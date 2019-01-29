@@ -6,6 +6,7 @@ import BusinessLogic.Services.ItemService;
 import BusinessLogic.Services.MailService;
 import BusinessLogic.Services.OrderService;
 import com.google.gson.*;
+import com.sun.deploy.net.HttpRequest;
 import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
@@ -39,7 +40,7 @@ public class OrderResource {
     @EJB
     private OrderService orderService;
 
-    @EJB
+    @Inject
     private ItemService itemService;
 
     @Inject
@@ -125,6 +126,7 @@ public class OrderResource {
             session.setAttribute("items", items);
 
         }
+        Gson gson = new Gson();
 
         JsonParser jsonParser = new JsonParser();
         JsonElement elem = jsonParser.parse(content);
@@ -139,19 +141,72 @@ public class OrderResource {
         String oldDate = date.getAsString();
         SimpleDateFormat oldDateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
         Date newDate = new Date();
+        if((oldDate.length() == 0)||(oldDate == null)){
+            oldDate = "01/01/1970";
+        }
+
+
 try {
-
-
     newDate = oldDateFormat.parse(oldDate);
-}catch (Exception e){
+}catch (Exception e){ }
 
-}
         addition.setStartDate(newDate);
-        LinkedList newItems = (LinkedList<OrderItem>)session.getAttribute("items");
+        List newItems = (LinkedList<OrderItem>)session.getAttribute("items");
         newItems.add(addition);
 
         session.setAttribute("items",newItems);
         return Response.ok().entity(((LinkedList<OrderItem>) session.getAttribute("items")).size()).build();
+    }
+
+
+
+
+    @GET
+    @Path("/getCartItems")
+    public Response getCartItems(String content, @Context HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        Gson gson = new Gson();
+
+        if (session.isNew()){
+            return Response.ok().entity(gson.toJson("No Items")).build();
+        }
+
+        List <OrderItem> testItems = new LinkedList<>();
+        testItems = (List <OrderItem>)session.getAttribute("items");
+        if (testItems == null){
+            return Response.ok().entity(gson.toJson("No Items")).build();
+        }
+
+
+
+        List<OrderItem> items = (List<OrderItem>)session.getAttribute("items");
+        List<OrderItemDTO> dtos = new LinkedList<>();
+        for (OrderItem item : items) {
+            OrderItemDTO dto = new OrderItemDTO();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(item.getStartDate());
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal.get(Calendar.YEAR);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String dayString = String.valueOf(day);
+            if(day<10)
+                dayString ="0"+day;
+            String string = month + "/" + dayString + "/" + year;
+            if(year == 1970)
+            {
+                string = "";
+            }
+            dto.setAmount(item.getAmount());
+            dto.setDate(string);
+            ItemType iType = itemService.getItemTypeById(item.getItemType().getId());
+            dto.setName(iType.getName());
+            dto.setPrice(iType.getPrice());
+            dto.setUrl(iType.getImageUrl());
+            dto.setCategoryId(iType.getCategory().getId());
+            dtos.add(dto);
+        }
+        return Response.ok().entity(gson.toJson(dtos)).build();
     }
 
     @POST
