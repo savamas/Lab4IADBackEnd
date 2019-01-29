@@ -136,7 +136,7 @@ function addToCart() {
 
         var sendTime = {
             id : window.localStorage.getItem("selectedItemId"),
-            amount: "",
+            amount: "1",
             booking: a
         };
 
@@ -162,8 +162,8 @@ function addToCart() {
         $.ajax({
             type: "POST",
             url: "http://localhost:8080/Lab4IADBackEnd_Web_exploded/resource/order/addToCart",
-            contentType: "application/json",
-            data: JSON.stringify(sendQuantity)
+           contentType: "application/json",
+           data: JSON.stringify(sendQuantity)
         });
     }
    // window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/catalogItems.jsp";

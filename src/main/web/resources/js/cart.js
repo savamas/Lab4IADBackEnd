@@ -14,13 +14,25 @@ $('document').ready(function () {
             } else {
                 for (i = 0; i < data.length; i++) {
                     alert("!" + data[i].name + "!" + data[i].amount + "!" + data[i].price + "!" + data[i].date + "!");
-                    // $('#filteredItems').append('<li class="media">\n' +
-                    //     '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
-                    //     '                    <div class="media-body">\n' +
-                    //     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
-                    //     '                        Стоимость: ' + data[i].price +  '\n' +
-                    //     '                    </div>\n' +
-                    //     '                </li>');
+                    if (data[i].date != "") {
+                        $('#itemsInCart').append('<li class="media">\n' +
+                            '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                            '                    <div class="media-body">\n' +
+                            '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
+                            '                        Стоимость: ' + data[i].price +  '\n' +
+                            '                        Дата: ' + data[i].date +  '\n' +
+                            '                    </div>\n' +
+                            '                </li>');
+                    } else {
+                        $('#itemsInCart').append('<li class="media">\n' +
+                            '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                            '                    <div class="media-body">\n' +
+                            '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
+                            '                        Стоимость: ' + data[i].price +  '\n' +
+                            '                        Количество: ' + data[i].amount +  '\n' +
+                            '                    </div>\n' +
+                            '                </li>');
+                    }
                 }
             }
         })

@@ -120,13 +120,18 @@ public class OrderResource {
     @Path("/addToCart")
     public Response setStatuses(String content, @Context HttpServletRequest request){
 
+//
+//        content ="{\"id\":\"11\",\"amount\":\"1\",\"booking\":\"\"}";
+
         HttpSession session = request.getSession();
-        if (session.isNew()){
+
+        if (session.getAttribute("items") == null){
             Collection<OrderItem> items = new LinkedList<>();
             session.setAttribute("items", items);
 
         }
         Gson gson = new Gson();
+
 
         JsonParser jsonParser = new JsonParser();
         JsonElement elem = jsonParser.parse(content);
