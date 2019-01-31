@@ -7,6 +7,7 @@ import BusinessLogic.Services.MailService;
 import BusinessLogic.Services.OrderService;
 import com.google.gson.*;
 import com.sun.deploy.net.HttpRequest;
+import interfaces.JWTTokenNeeded;
 import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
@@ -76,43 +77,63 @@ public class OrderResource {
         return Response.ok().build();
     }
 
-    @POST
+    @GET
     @Path("/create")
-    public Response createOrder(String content, @Context HttpSession session) {
-        JsonParser jparser = new JsonParser();
-        JsonElement root = jparser.parse(content);
-        JsonObject jobj = root.getAsJsonObject();
-        JsonArray items = jobj.getAsJsonArray("items");
-
-        Map<String, String> statusValues = parser.extractParams(content);
-        String paymentType = statusValues.get("paymentType");
-        String paymentStatus = statusValues.get("paymentStatus");
-        String deliveryType = statusValues.get("deliveryType");
+    @JWTTokenNeeded
+    public Response createOrder(String content, @Context HttpServletRequest request) {
 
 
+        content = "";
+        Gson gson = new Gson();
+        //JsonParser jsonParser = new JsonParser();
+        //JsonElement elem = jsonParser.parse(content);
+        //JsonObject obj = elem.getAsJsonObject();
+        //JsonElement paymentType = obj.get("paymentType");
+        //JsonElement paymentStatus = obj.get("paymentStatus");
+        //JsonElement deliveryType = obj.get("deliveryType");
+
+
+        HttpSession session = request.getSession();
+
+        if (session.getAttribute("items") == null)
+            return Response.ok().entity(gson.toJson("No Items")).build();
+
+
+        System.out.println("1");
 
 
 
-        LinkedList cartItems = (LinkedList<OrderItem>)session.getAttribute("items");
+        LinkedList<OrderItem> cartItems = (LinkedList<OrderItem>)session.getAttribute("items");
         LinkedList<Integer> ids = new LinkedList();
-        for (Object item : cartItems) {
-            OrderItem orItem = (OrderItem)item;
-            ids.add(orItem.getId());
+        for (OrderItem item : cartItems) {
+
+            ids.add(item.getItemType().getId());
         }
+
+        System.out.println("2");
 
         Map<Integer,Integer> map = itemService.getItemsAmountByIds(ids);
 
 
+        System.out.println("3");
+        for (OrderItem checkItem: cartItems) {
 
-        for (int i = 0 ; i < ids.size(); i++){
 
-            OrderItem checkItem = (OrderItem)cartItems.get(i);
-            if (checkItem.getAmount() > map.get(checkItem.getId())){
+            System.out.println("4");
+            if (checkItem.getAmount() > map.get(checkItem.getItemType().getId())){
                 itemService.addRequestedItem(checkItem, (checkItem.getAmount()- map.get(checkItem.getId())));
             }
+            System.out.println("5");
+            checkItem.getItemType().setPropertyCollection(itemService.getPropertiesByItemTypeId(checkItem.getItemType().getId()));
+            System.out.println("6");
         }
 
-        orderService.addOrder((Person)UserAuthenticationResource.getCurrentPerson(), cartItems,paymentType,paymentStatus, deliveryType);
+
+        orderService.addOrder((Person)UserAuthenticationResource.getCurrentPerson(), cartItems,"123","123", "123");
+        List<OrderItem> newList = new LinkedList<>();
+
+        session.setAttribute("items", newList);
+
         return Response.ok().build();
     }
 
@@ -122,6 +143,7 @@ public class OrderResource {
 
 
 
+        //content = "{\"id\":\"11\",\"amount\":\"1\",\"booking\":\"\"}";
 
         HttpSession session = request.getSession();
 
@@ -181,18 +203,15 @@ try {
         HttpSession session = request.getSession();
         Gson gson = new Gson();
 
-        System.out.println("1");
         if (session.isNew()){
             return Response.ok().entity(gson.toJson("No Items")).build();
         }
 
-        System.out.println("2");
         List <OrderItem> testItems = new LinkedList<>();
         testItems = (List <OrderItem>)session.getAttribute("items");
         if ((testItems == null)||(testItems.size() == 0)){
             return Response.ok().entity(gson.toJson("No Items")).build();
         }
-        System.out.println("3");
 
 
 
@@ -231,7 +250,7 @@ try {
 
 
 
-        
+
 
 
         JsonParser jsonParser = new JsonParser();
@@ -239,24 +258,20 @@ try {
         JsonObject obj = elem.getAsJsonObject();
         JsonElement name = obj.get("name");
 
-     //   System.out.println("ALALALALLA");
 
         HttpSession session = request.getSession();
 
-     //   System.out.println("FFFFFF");
         List<OrderItem> items = (List<OrderItem>) session.getAttribute("items");
 
-      //  System.out.println("QQQQQQ");
+
+        List<OrderItem> toRemove = new LinkedList<>();
         for (OrderItem item : items) {
             if(item.getItemType().getName().equals(name.getAsString()))
-                items.remove(item);
+                toRemove.add(item);
         }
 
-      //  System.out.println("AVAVVA");
-
+        items.removeAll(toRemove);
         session.setAttribute("items", items);
-
-      //  System.out.println("ZZZZZZZ");
 
         return Response.ok().build();
     }

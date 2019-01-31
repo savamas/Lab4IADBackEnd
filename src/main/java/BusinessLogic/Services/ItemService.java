@@ -22,15 +22,55 @@ public class ItemService {
     public Map<Integer,Integer> getItemsAmountByIds(Collection<Integer> ids){
 
         Map<Integer,Integer> map = new HashMap<>();
-        List list = entityManager.createQuery("select c.itemType as id, sum(c.amount) as amount from TypeInJoint c group by c.amount ").getResultList();
-        for(int i =0; i < list.size(); i++){
 
-            Object[] obj = (Object[]) list.get(i);
-            map.put((int)obj[0], (int)obj[1]);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("(");
+        for (int i : ids) {
+            stringBuilder.append("'");
+            stringBuilder.append(i);
+            stringBuilder.append("'");
+            stringBuilder.append(",");
+        }
+        stringBuilder.delete(stringBuilder.lastIndexOf(","),stringBuilder.lastIndexOf(",")+1);
+        stringBuilder.append(")");
 
+        String idsString = stringBuilder.toString();
+
+        List<TypeInJoint> list = (List<TypeInJoint>) entityManager.createQuery("select c from TypeInJoint c where c.itemType.Id in "+ idsString).getResultList();
+        Iterator<TypeInJoint> itr = list.listIterator();
+        while(itr.hasNext()) {
+
+            int id = 0;
+            int amount = 0;
+
+            boolean first = true;
+            while(itr.hasNext()) {
+                TypeInJoint typeInJoint = itr.next();
+                if(typeInJoint == null)
+                    break;
+                if (first) {
+
+                    first = false;
+                    id = typeInJoint.getItemType().getId();
+                }
+
+                if(typeInJoint.getItemType().getId() == id) {
+                    amount = amount + typeInJoint.getAmount();
+                    itr.remove();
+                }
+
+            }
+            map.put(id, amount);
+            itr = list.listIterator();
         }
 
         return map;
+    }
+
+
+    public Collection<Property> getPropertiesByItemTypeId(int id)
+    {
+        return (Collection<Property>)entityManager.createQuery("select c from Property c where c.itemType.Id = "+ id).getResultList();
     }
 
     public ItemType getItemTypeById(int id){

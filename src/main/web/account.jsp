@@ -24,7 +24,7 @@
                 <a class="nav-link" href="login.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Войти</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="about.jsp" style="color: #FFF2CD; font-family: Rockwell; font-size: 25px;">Справка</a>
+                <a class="nav-link" href="about.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Справка</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="cart.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Корзина</a>

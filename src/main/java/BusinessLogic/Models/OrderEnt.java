@@ -30,7 +30,7 @@ public class OrderEnt {
     private Date dateCreated;
     private Date dateReceived;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Collection<OrderItem> orderItemCollection;
 
     @OneToOne

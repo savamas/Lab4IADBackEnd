@@ -59,7 +59,7 @@ $('document').ready(function () {
                     '      </div>\n' +
                     '      <div class="modal-footer">\n' +
                     '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>\n' +
-                    '        <button type="button" class="btn btn-primary">Подтвердить</button>\n' +
+                    '        <button type="button" class="btn btn-primary" onclick="confirmOrder()">Подтвердить</button>\n' +
                     '      </div>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -72,7 +72,32 @@ $('document').ready(function () {
 });
 
 function confirmOrder() {
-
+    var authToken = window.localStorage.getItem('token');
+    if (authToken == null) {
+        authToken = "Bearer ";
+    }
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/Lab4IADBackEnd_Web_exploded/resource/order/create",
+        headers: {
+            Authorization: authToken
+        },
+        contentType: "application/json",
+        error: function(xhr, status, error){
+            if (error == "Unauthorized") {
+                window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/login.jsp";
+            }
+        },
+        success: function () {
+            $("#cartConfirmButton").empty();
+            $('#cartConfirmButton').append('<ul class="list-unstyled" id="itemsInCart"><div class="jumbotron" style="background-color: #FFF2CD">\n' +
+                '    <h1 class="display-4">Ваша корзина пуста</h1>\n' +
+                '    <p class="lead">Для совершения покупок перейдите в наш каталог</p>\n' +
+                '    <hr class="my-4">\n' +
+                '    <p style="font-size: x-large"><a href="catalogMain.jsp">Перейти</a></p>\n' +
+                '</div></ul>');
+        }
+    });
 }
 
 function deleteItemFromCart(e){
