@@ -166,5 +166,5 @@ function addToCart() {
            data: JSON.stringify(sendQuantity)
         });
     }
-   // window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/catalogItems.jsp";
+    window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/catalogItems.jsp";
 }

@@ -40,7 +40,7 @@ public class OrderResource {
     @EJB
     private OrderService orderService;
 
-    @Inject
+    @EJB
     private ItemService itemService;
 
     @Inject
@@ -120,8 +120,8 @@ public class OrderResource {
     @Path("/addToCart")
     public Response setStatuses(String content, @Context HttpServletRequest request){
 
-//
-//        content ="{\"id\":\"11\",\"amount\":\"1\",\"booking\":\"\"}";
+
+
 
         HttpSession session = request.getSession();
 
@@ -140,6 +140,7 @@ public class OrderResource {
         JsonElement amount = obj.get("amount");
         JsonElement date = obj.get("booking");
 
+
         OrderItem addition = new OrderItem();
         addition.setItemType(itemService.getItemTypeById(id.getAsInt()));
         addition.setAmount(amount.getAsInt());
@@ -156,7 +157,14 @@ try {
 }catch (Exception e){ }
 
         addition.setStartDate(newDate);
-        List newItems = (LinkedList<OrderItem>)session.getAttribute("items");
+        List<OrderItem> newItems = (LinkedList<OrderItem>)session.getAttribute("items");
+
+        for ( OrderItem item: newItems) {
+            if(item.getItemType().getName().equals(addition.getItemType().getName())){
+                addition.setAmount(addition.getAmount()+item.getAmount());
+                newItems.remove(item);
+            }
+        }
         newItems.add(addition);
 
         session.setAttribute("items",newItems);
@@ -173,15 +181,18 @@ try {
         HttpSession session = request.getSession();
         Gson gson = new Gson();
 
+        System.out.println("1");
         if (session.isNew()){
             return Response.ok().entity(gson.toJson("No Items")).build();
         }
 
+        System.out.println("2");
         List <OrderItem> testItems = new LinkedList<>();
         testItems = (List <OrderItem>)session.getAttribute("items");
-        if (testItems == null){
+        if ((testItems == null)||(testItems.size() == 0)){
             return Response.ok().entity(gson.toJson("No Items")).build();
         }
+        System.out.println("3");
 
 
 
@@ -216,19 +227,37 @@ try {
 
     @POST
     @Path("/removeFromCart")
-    public Response setStatuses(String content, @Context HttpSession session){
+    public Response removeFromCart(String content,@Context HttpServletRequest request){
 
-        Map<String, String> statusValues = parser.extractParams(content);
-        int id = Integer.valueOf(statusValues.get("id"));
-        LinkedList items = (LinkedList<OrderItem>)session.getAttribute("items");
-        for(int i =0; i<items.size(); i++){
-            OrderItem o = (OrderItem)items.get(i);
-            if(o.getId() == id){
-                items.remove(i);
-            }
 
-            session.setAttribute("items",items);
+
+        
+
+
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement name = obj.get("name");
+
+     //   System.out.println("ALALALALLA");
+
+        HttpSession session = request.getSession();
+
+     //   System.out.println("FFFFFF");
+        List<OrderItem> items = (List<OrderItem>) session.getAttribute("items");
+
+      //  System.out.println("QQQQQQ");
+        for (OrderItem item : items) {
+            if(item.getItemType().getName().equals(name.getAsString()))
+                items.remove(item);
         }
+
+      //  System.out.println("AVAVVA");
+
+        session.setAttribute("items", items);
+
+      //  System.out.println("ZZZZZZZ");
+
         return Response.ok().build();
     }
 
