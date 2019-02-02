@@ -1,6 +1,8 @@
 $('document').ready(function () {
     if (window.localStorage.getItem('token') !== null) {
         document.getElementById('onlyForLoggedUsers').innerHTML = "<a class=\"nav-link\" href=\"account.jsp\" style=\"color: #F3ECD6; font-family: Rockwell; font-size: 25px;\">Личный кабинет</a>";
+    } else {
+        document.getElementById('onlyForUnloggedUsers').innerHTML = "<a class=\"nav-link\" href=\"login.jsp\" style=\"color: #F3ECD6; font-family: Rockwell; font-size: 25px;\">Войти</a>";
     }
 
     $.ajax({
@@ -85,6 +87,7 @@ function confirmOrder() {
         contentType: "application/json",
         error: function(xhr, status, error){
             if (error == "Unauthorized") {
+                window.localStorage.removeItem('token');
                 window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/login.jsp";
             }
         },
@@ -96,6 +99,7 @@ function confirmOrder() {
                 '    <hr class="my-4">\n' +
                 '    <p style="font-size: x-large"><a href="catalogMain.jsp">Перейти</a></p>\n' +
                 '</div></ul>');
+            window.location.reload();
         }
     });
 }
@@ -137,7 +141,7 @@ function deleteItemFromCart(e){
                         for (i = 0; i < data.length; i++) {
                             if (data[i].date != "") {
                                 $('#itemsInCart').append('<li class="media">\n' +
-                                    '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                                    '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image">\n' +
                                     '                    <div class="media-body">\n' +
                                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                                     '                        Стоимость: ' + data[i].price +  '\n' +
@@ -147,7 +151,7 @@ function deleteItemFromCart(e){
                                     '                </li>');
                             } else {
                                 $('#itemsInCart').append('<li class="media">\n' +
-                                    '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                                    '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image">\n' +
                                     '                    <div class="media-body">\n' +
                                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                                     '                        Стоимость: ' + data[i].price +  '\n' +

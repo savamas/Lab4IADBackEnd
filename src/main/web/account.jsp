@@ -20,9 +20,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="catalogMain.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Каталог</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="login.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Войти</a>
-            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="about.jsp" style="color: #F3ECD6; font-family: Rockwell; font-size: 25px;">Справка</a>
             </li>

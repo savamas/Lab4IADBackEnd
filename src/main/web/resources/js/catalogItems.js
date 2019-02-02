@@ -5,6 +5,8 @@ var dataToSave = [];
 $('document').ready(function () {
     if (window.localStorage.getItem('token') !== null) {
         document.getElementById('onlyForLoggedUsers').innerHTML = "<a class=\"nav-link\" href=\"account.jsp\" style=\"color: #F3ECD6; font-family: Rockwell; font-size: 25px;\">Личный кабинет</a>";
+    } else {
+        document.getElementById('onlyForUnloggedUsers').innerHTML = "<a class=\"nav-link\" href=\"login.jsp\" style=\"color: #F3ECD6; font-family: Rockwell; font-size: 25px;\">Войти</a>";
     }
 
     var params = {
@@ -54,7 +56,7 @@ $('document').ready(function () {
             for (i = 0; i < data.length; i++) {
                 dataToSave[i] = data[i];
                 $('#filteredItems').append('<li class="media">\n' +
-                    '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                    '                    <img class="mr-3" src="' + data[i].url + '" width="200px" alt="Generic placeholder image">\n' +
                     '                    <div class="media-body">\n' +
                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                     '                        Стоимость: ' + data[i].price +  '\n' +
@@ -85,7 +87,7 @@ $('document').ready(function () {
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
                     $('#filteredItems').append('<li class="media">\n' +
-                        '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                        '                    <img class="mr-3" src="' + data[i].url + '" width="200px" alt="Generic placeholder image">\n' +
                         '                    <div class="media-body">\n' +
                         '                        <a href="concreteItem.jsp"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                         '                        Стоимость: ' + data[i].price +  '\n' +
@@ -140,7 +142,7 @@ $('document').ready(function () {
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
                     $('#filteredItems').append('<li class="media">\n' +
-                        '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                        '                    <img class="mr-3" src="' + data[i].url + '" width="200px" alt="Generic placeholder image">\n' +
                         '                    <div class="media-body">\n' +
                         '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                         '                        Стоимость: ' + data[i].price +  '\n' +

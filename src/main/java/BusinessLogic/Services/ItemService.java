@@ -31,7 +31,7 @@ public class ItemService {
             stringBuilder.append("'");
             stringBuilder.append(",");
         }
-        stringBuilder.delete(stringBuilder.lastIndexOf(","),stringBuilder.lastIndexOf(",")+1);
+        stringBuilder.setLength(stringBuilder.length()-1);
         stringBuilder.append(")");
 
         String idsString = stringBuilder.toString();
@@ -138,9 +138,25 @@ public class ItemService {
                     filter.setFilterName(prop.getName());
                 }
 
+
+
                 if(prop.getName().equals(filter.getFilterName())) {
-                    filter.addValue(prop.getValue());
-                    itr.remove();
+
+                    boolean skip = false;
+                    Iterator<String> iter = filter.getFilterValues().listIterator();
+                    while (iter.hasNext()){
+                        if(iter.next().equals(prop.getValue())){
+                            itr.remove();
+                            skip = true;
+                        }
+
+
+                    }
+                    if(!skip){
+                        filter.addValue(prop.getValue());
+                        itr.remove();
+                    }
+
                 }
 
             }
