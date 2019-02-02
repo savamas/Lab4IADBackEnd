@@ -57,7 +57,17 @@ $('document').ready(function () {
                     '        </button>\n' +
                     '      </div>\n' +
                     '      <div class="modal-body">\n' +
-                    '        Вы действительно хотите приобрести выбранные товары?\n' +
+                    '        <label for="deliveryType">Выберите способ доставки:</label>\n' +
+                    '            <select id="deliveryType" class="form-control">\n' +
+                    '                <option selected>Самовывоз</option>\n' +
+                    '                <option>Доставка на дом</option>\n' +
+                    '            </select>' +
+                    '        <label for="paymentType">Выберите способ оплаты:</label>\n' +
+                    '            <select id="paymentType" class="form-control">\n' +
+                    '                <option selected>По карте онлайн</option>\n' +
+                    '                <option>Наличными при получении</option>\n' +
+                    '                <option selected>По карте при получении</option>\n' +
+                    '            </select>' +
                     '      </div>\n' +
                     '      <div class="modal-footer">\n' +
                     '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>\n' +
@@ -78,12 +88,28 @@ function confirmOrder() {
     if (authToken == null) {
         authToken = "Bearer ";
     }
+    var dT = $('#deliveryType').val();
+    var pT = $('#paymentType').val();
+ //   alert(dT);
+ //   alert(pT);
+    var pS = "";
+    if (pT == "По карте онлайн") {
+        pS = "Оплачен";
+    } else {
+        pS = "Не оплачен";
+    }
+    var myParams = {
+        paymentType: pT,
+        paymentStatus: pS,
+        deliveryType: dT
+    };
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "http://localhost:8080/Lab4IADBackEnd_Web_exploded/resource/order/create",
         headers: {
             Authorization: authToken
         },
+        data: JSON.stringify(myParams),
         contentType: "application/json",
         error: function(xhr, status, error){
             if (error == "Unauthorized") {
@@ -176,7 +202,17 @@ function deleteItemFromCart(e){
                             '        </button>\n' +
                             '      </div>\n' +
                             '      <div class="modal-body">\n' +
-                            '        Вы действительно хотите приобрести выбранные товары?\n' +
+                            '        <label for="deliveryType">Выберите способ доставки:</label>\n' +
+                            '            <select id="deliveryType" class="form-control">\n' +
+                            '                <option selected>Самовывоз</option>\n' +
+                            '                <option>Доставка на дом</option>\n' +
+                            '            </select>' +
+                            '        <label for="paymentType">Выберите способ оплаты:</label>\n' +
+                            '            <select id="paymentType" class="form-control">\n' +
+                            '                <option selected>По карте онлайн</option>\n' +
+                            '                <option selected>По карте при получении</option>\n' +
+                            '                <option>Наличными при получении</option>\n' +
+                            '            </select>' +
                             '      </div>\n' +
                             '      <div class="modal-footer">\n' +
                             '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>\n' +

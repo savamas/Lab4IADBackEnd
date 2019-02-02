@@ -1,20 +1,21 @@
 package Resources;
 
-import BusinessLogic.AccountManager;
-import BusinessLogic.Models.*;
+import BusinessLogic.Models.ItemType;
+import BusinessLogic.Models.OrderEnt;
+import BusinessLogic.Models.OrderItem;
+import BusinessLogic.Models.Person;
 import BusinessLogic.Services.ItemService;
 import BusinessLogic.Services.MailService;
 import BusinessLogic.Services.OrderService;
-import com.google.gson.*;
-import com.sun.deploy.net.HttpRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import interfaces.JWTTokenNeeded;
-import interfaces.KeyGenerator;
 import interfaces.Parsabale;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
+import javax.ejb.PostActivate;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,11 +24,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.io.UnsupportedEncodingException;
-import java.security.Key;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.*;
 
 @Path("/order")
@@ -77,20 +74,19 @@ public class OrderResource {
         return Response.ok().build();
     }
 
-    @GET
+    @POST
     @Path("/create")
     @JWTTokenNeeded
     public Response createOrder(String content, @Context HttpServletRequest request) {
 
 
-        content = "";
         Gson gson = new Gson();
-        //JsonParser jsonParser = new JsonParser();
-        //JsonElement elem = jsonParser.parse(content);
-        //JsonObject obj = elem.getAsJsonObject();
-        //JsonElement paymentType = obj.get("paymentType");
-        //JsonElement paymentStatus = obj.get("paymentStatus");
-        //JsonElement deliveryType = obj.get("deliveryType");
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement paymentType = obj.get("paymentType");
+        JsonElement paymentStatus = obj.get("paymentStatus");
+        JsonElement deliveryType = obj.get("deliveryType");
 
 
         HttpSession session = request.getSession();
@@ -99,7 +95,7 @@ public class OrderResource {
             return Response.ok().entity(gson.toJson("No Items")).build();
 
 
-        System.out.println("1");
+
 
 
 
@@ -110,30 +106,22 @@ public class OrderResource {
             ids.add(item.getItemType().getId());
         }
 
-        System.out.println("2");
-
         Map<Integer,Integer> map = itemService.getItemsAmountByIds(ids);
 
 
-        System.out.println("3");
         for (OrderItem checkItem: cartItems) {
 
 
-            System.out.println("4");
+
             if (checkItem.getAmount() > map.get(checkItem.getItemType().getId())){
                 itemService.addRequestedItem(checkItem, (checkItem.getAmount()- map.get(checkItem.getId())));
             }
-            System.out.println("5");
             checkItem.getItemType().setPropertyCollection(itemService.getPropertiesByItemTypeId(checkItem.getItemType().getId()));
-            System.out.println("6");
         }
 
-
-        orderService.addOrder((Person)UserAuthenticationResource.getCurrentPerson(), cartItems,"123","123", "123");
+        orderService.addOrder((Person) UserAuthenticationResource.getCurrentPerson(), cartItems,paymentType.getAsString(),paymentStatus.getAsString(),deliveryType.getAsString());
         List<OrderItem> newList = new LinkedList<>();
-
         session.setAttribute("items", newList);
-
         return Response.ok().build();
     }
 
@@ -246,7 +234,7 @@ try {
 
     @POST
     @Path("/removeFromCart")
-    public Response removeFromCart(String content,@Context HttpServletRequest request){
+    public Response removeFromCart(String content, @Context HttpServletRequest request){
 
 
 
@@ -277,9 +265,105 @@ try {
     }
 
 
+    @GET
+    @Path("/getPersonOrders")
+    public Response getPersonOrders(@Context HttpServletRequest request) {
+
+        List<OrderEnt> orders = (List<OrderEnt>) orderService.getCustomerOrders(UserAuthenticationResource.getCurrentPerson());
+
+        List<OrderDTO> resultList = new LinkedList<>();
+
+        Gson gson = new Gson();
+
+        for (OrderEnt orderEnt: orders) {
+
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setId(orderEnt.getId());
+            orderDTO.setDateCreated(orderEnt.getDateCreated());
+            orderDTO.setDateReceived(orderEnt.getDateReceived());
+            orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
+            orderDTO.setPaymentType(orderEnt.getPaymentType());
+            orderDTO.setDeliveryType(orderEnt.getDeliveryType());
+            if(orderEnt.getStatus() == null)
+            {
+                orderDTO.setStatus("Не указан");
+            }
+            else
+            {
+                orderDTO.setStatus(orderEnt.getStatus());
+            }
+
+            resultList.add(orderDTO);
+        }
+
+        System.out.println(resultList.size());
+        return Response.ok().entity(gson.toJson(resultList)).build();
+    }
 
 
+    @POST
+    @Path("/getOrderItems")
+    public Response getOrderItems (String content, @Context HttpServletRequest request) {
 
+
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement id = obj.get("id");
+
+        List<OrderItem> items = (List<OrderItem>) orderService.getOrderContents(id.getAsInt());
+
+        List<OrderItemDTO> resultList = new LinkedList<>();
+
+        Gson gson = new Gson();
+
+        for (OrderItem orderItem : items) {
+
+            OrderItemDTO itemDTO = new OrderItemDTO();
+
+            itemDTO.setPrice(orderItem.getItemType().getPrice());
+            itemDTO.setName(orderItem.getItemType().getName());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(orderItem.getStartDate());
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal.get(Calendar.YEAR);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String dayString = String.valueOf(day);
+            if(day<10)
+                dayString ="0"+day;
+            String string = month + "/" + dayString + "/" + year;
+
+            itemDTO.setDate(string);
+            itemDTO.setCategoryId(orderItem.getItemType().getCategory().getId());
+            itemDTO.setUrl(orderItem.getItemType().getImageUrl());
+            itemDTO.setAmount(orderItem.getAmount());
+
+            resultList.add(itemDTO);
+        }
+
+//        System.out.println(resultList.size());
+
+        return Response.ok().entity(gson.toJson(resultList)).build();
+    }
+
+
+    @GET
+    @Path("/getPersonInfo")
+    public Response getPersonInfo(@Context HttpServletRequest request) {
+
+        PersonDTO personDTO = new PersonDTO();
+        Person sourcePerson = UserAuthenticationResource.getCurrentPerson();
+
+        personDTO.setFirstName(sourcePerson.getFirstName());
+        personDTO.setLastName(sourcePerson.getLastName());
+        personDTO.setPhoneNum(sourcePerson.getPhoneNum());
+        personDTO.setUsername(sourcePerson.getUsername());
+        personDTO.setSex(sourcePerson.getSex());
+
+        Gson gson = new Gson();
+
+        return Response.ok().entity(gson.toJson(personDTO)).build();
+    }
 
 
 }

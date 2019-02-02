@@ -6,22 +6,24 @@ import BusinessLogic.Models.Person;
 import lombok.Data;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.Order;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
+import static javax.ejb.TransactionAttributeType.REQUIRED;
+
+@Data
 @Stateless
 public class OrderService {
 
     @PersistenceContext(unitName = "personUnit")
     EntityManager entityManager;
 
+    @TransactionAttribute(REQUIRED)
     public void addOrder(Person customer, Collection<OrderItem> items, String paymentType, String paymentStatus, String deliveryType){
+
         OrderEnt order = new OrderEnt();
         order.setCustomer(customer);
         order.setOrderItemCollection(items);
@@ -32,6 +34,9 @@ public class OrderService {
         Date dat = new Date();
         order.setDateCreated(dat);
         entityManager.persist(order);
+        for (OrderItem item : order.getOrderItemCollection()) {
+            item.setOrder(order);
+        }
     }
 
     public void setDeliveryStatus(String status, OrderEnt order){
@@ -58,6 +63,14 @@ public class OrderService {
 
     public OrderEnt findOrder(int id){
         return entityManager.find(OrderEnt.class, id);
+    }
+
+    public Person findPerson(int id){
+        return entityManager.find(Person.class, id);
+    }
+
+    public Collection<OrderItem> getOrderContents(int id){
+        return (Collection<OrderItem>) entityManager.createQuery("select c from OrderItem c where c.order.Id ="+ id).getResultList();
     }
 
 
