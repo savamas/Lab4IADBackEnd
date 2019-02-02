@@ -22,7 +22,7 @@ $('document').ready(function () {
                 for (i = 0; i < data.length; i++) {
                     if (data[i].date != "") {
                         $('#itemsInCart').append('<li class="media">\n' +
-                            '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image">\n' +
                             '                    <div class="media-body">\n' +
                             '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                             '                        Стоимость: ' + data[i].price +  '\n' +
@@ -32,7 +32,7 @@ $('document').ready(function () {
                             '                </li>');
                     } else {
                         $('#itemsInCart').append('<li class="media">\n' +
-                            '                    <img class="mr-3" src="' + data[i].imageUrl + '" alt="Generic placeholder image">\n' +
+                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image">\n' +
                             '                    <div class="media-body">\n' +
                             '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
                             '                        Стоимость: ' + data[i].price +  '\n' +
