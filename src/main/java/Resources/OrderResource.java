@@ -48,28 +48,37 @@ public class OrderResource {
     private Parsabale parser;
 
     @POST
+    @JWTTokenNeeded
     @Path("/setStatus")
     public Response setStatuses(String content){
-        Map<String, String> statusValues = parser.extractParams(content);
-        String newDeliveryStatus = statusValues.get("newDeliveryStatus");
-        String newPaymentStatus = statusValues.get("newDeliveryStatus");
-        int orderId = Integer.parseInt(statusValues.get("orderId"));
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+
+        JsonElement newDeliveryStatusJ = obj.get("newDeliveryStatus");
+        JsonElement newPaymentStatusJ = obj.get("newPaymentStatus");
+        JsonElement orderIdJ = obj.get("orderId");
+
+        String newDeliveryStatus = newDeliveryStatusJ.getAsString();
+        String newPaymentStatus = newPaymentStatusJ.getAsString();
+        int orderId = orderIdJ.getAsInt();
 
         OrderEnt ord = orderService.findOrder(orderId);
 
         boolean needUpdates = false;
-        if (ord.getDeliveryStatus().equals(newDeliveryStatus)){
+        if (!(ord.getDeliveryStatus().equals(newDeliveryStatus))){
             orderService.setDeliveryStatus(newDeliveryStatus, ord);
             needUpdates = true;
         }
 
-        if (ord.getPaymentStatus().equals(newPaymentStatus)){
+        if (!(ord.getPaymentStatus().equals(newPaymentStatus))){
             orderService.setPaymentStatus(newPaymentStatus, ord);
             needUpdates = true;
         }
 
-        if(needUpdates)
-            mailService.sendUpdate(ord, newDeliveryStatus, newPaymentStatus);
+        //if(needUpdates)
+          //  mailService.sendUpdate(ord, newDeliveryStatus, newPaymentStatus);
 
         return Response.ok().build();
     }
@@ -272,6 +281,7 @@ try {
         List<OrderEnt> orders = (List<OrderEnt>) orderService.getCustomerOrders(UserAuthenticationResource.getCurrentPerson());
 
         List<OrderDTO> resultList = new LinkedList<>();
+        resultList.clear();
 
         Gson gson = new Gson();
 
@@ -296,7 +306,6 @@ try {
             resultList.add(orderDTO);
         }
 
-        System.out.println(resultList.size());
         return Response.ok().entity(gson.toJson(resultList)).build();
     }
 
@@ -341,8 +350,6 @@ try {
             resultList.add(itemDTO);
         }
 
-//        System.out.println(resultList.size());
-
         return Response.ok().entity(gson.toJson(resultList)).build();
     }
 
@@ -365,5 +372,89 @@ try {
         return Response.ok().entity(gson.toJson(personDTO)).build();
     }
 
+    @GET
+
+    @Path("/getUnclaimedOrders")
+    public Response getUnclaimedOrders() {
+        List<OrderEnt> orders = (List<OrderEnt>)orderService.getUnclaimedOrders();
+        List<OrderDTO> resultList = new LinkedList<>();
+        Gson gson = new Gson();
+
+        for (OrderEnt orderEnt: orders) {
+
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setId(orderEnt.getId());
+            orderDTO.setDateCreated(orderEnt.getDateCreated());
+            orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
+            orderDTO.setPaymentType(orderEnt.getPaymentType());
+            orderDTO.setDeliveryType(orderEnt.getDeliveryType());
+
+            if(orderEnt.getStatus() == null)
+            {
+                orderDTO.setStatus("Не указан");
+            }
+            else
+            {
+                orderDTO.setStatus(orderEnt.getStatus());
+            }
+
+            resultList.add(orderDTO);
+        }
+
+        return Response.ok().entity(gson.toJson(resultList)).build();
+    }
+
+    @POST
+    @JWTTokenNeeded
+    @Path("/claimOrder")
+    public Response claimOrder(String content) {
+
+        //content =  "{\"id\":\"13\"}";
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement orderId = obj.get("id");
+
+        orderService.claimOrder(UserAuthenticationResource.getCurrentPerson(),orderId.getAsInt());
+
+        return Response.ok().build();
+
+    }
+
+    @GET
+    @JWTTokenNeeded
+    @Path("/getActiveOrders")
+    public Response getActiveOrders() {
+        List<OrderEnt> orders = (List<OrderEnt>) orderService.getActiveOrders(UserAuthenticationResource.getCurrentPerson().getId());
+
+        List<OrderDTO> resultList = new LinkedList<>();
+        resultList.clear();
+
+        Gson gson = new Gson();
+
+        for (OrderEnt orderEnt: orders) {
+
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setId(orderEnt.getId());
+            orderDTO.setDateCreated(orderEnt.getDateCreated());
+            orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
+            orderDTO.setPaymentType(orderEnt.getPaymentType());
+            orderDTO.setDeliveryType(orderEnt.getDeliveryType());
+            orderDTO.setPhoneNum(orderEnt.getCustomer().getPhoneNum());
+
+            if(orderEnt.getStatus() == null)
+            {
+                orderDTO.setStatus("Не указан");
+            }
+            else
+            {
+                orderDTO.setStatus(orderEnt.getStatus());
+            }
+
+            resultList.add(orderDTO);
+        }
+
+        return Response.ok().entity(gson.toJson(resultList)).build();
+    }
 
 }

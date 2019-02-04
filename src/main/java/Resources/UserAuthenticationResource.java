@@ -2,6 +2,7 @@ package Resources;
 
 import BusinessLogic.AccountManager;
 import BusinessLogic.Models.Person;
+import BusinessLogic.Services.ItemService;
 import interfaces.KeyGenerator;
 import interfaces.Parsabale;
 import io.jsonwebtoken.Jwts;
@@ -37,6 +38,9 @@ public class UserAuthenticationResource {
     @Inject
     private Parsabale parser;
 
+    @EJB
+    private ItemService itemService;
+
     @Inject
     private KeyGenerator keyGenerator;
 
@@ -60,10 +64,13 @@ public class UserAuthenticationResource {
 
             jsonObjectResponse.put("loginStatus", "OK");
             jsonObjectResponse.put("username", username);
+            jsonObjectResponse.put("occupation", itemService.getPersonOccupation(getCurrentPerson().getId()));
             jsonObjectResponse.put("token", "Bearer " + token);
         } else {
             jsonObjectResponse.put("error", "Username or password is incorrect");
         }
+
+
 
         return Response.ok().entity(jsonObjectResponse).build();
     }

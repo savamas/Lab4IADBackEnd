@@ -24,9 +24,9 @@ $('document').ready(function () {
     })
         .done(function (data) {
             for (i = 0; i < data.length; i++) {
-                $('#personOrders').append('<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">\n' +
+                $('#personOrders').append('<a href="concreteOrder.jsp" onclick="orderClick(this.innerHTML)" class="list-group-item list-group-item-action flex-column align-items-start">\n' +
                     '                    <div class="d-flex w-100 justify-content-between">\n' +
-                    '                        <h5 class="mb-1">Заказ от ' + data[i].dateCreated + '</h5>\n' +
+                    '                        <h5 class="mb-1">Заказ №' + data[i].Id + ' от ' + data[i].dateCreated + '</h5>\n' +
                     '                    </div>\n' +
                     '                    <p class="mb-1">Тип оплаты: ' + data[i].paymentType + ' Статус оплаты: ' + data[i].paymentStatus + ' Тип доставки: ' + data[i].deliveryType + ' Статус доставки: ' + data[i].deliveryStatus + '</p>\n' +
                     '                    <small>Дата получения: ' + data[i].dateReceived + '</small>\n' +
@@ -41,4 +41,10 @@ $('document').ready(function () {
 function leaveAccount() {
     window.localStorage.removeItem('token');
     window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/index.jsp";
+}
+
+function orderClick(e) {
+    var res = e.substring(120);
+    res = res.substring(0, res.indexOf(' '));
+    window.localStorage.setItem('selectedOrderId', res);
 }

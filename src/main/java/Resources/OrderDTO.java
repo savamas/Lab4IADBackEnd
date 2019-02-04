@@ -21,6 +21,7 @@ public class OrderDTO {
     private String deliveryStatus;
     private Date dateCreated;
     private Date dateReceived;
+    private String phoneNum;
 
 
 }

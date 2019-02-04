@@ -22,7 +22,12 @@ $('document').ready(function () {
                         "  Authorization successful!\n" +
                         "</div>");
                     window.localStorage.setItem('token', data.token);
-                    window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/index.jsp";
+                    //window.localStorage.setItem('occupation', data.occupation);
+                    if (data.occupation == "Courier") {
+                        window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/backOffice.jsp";
+                    } else {
+                        window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/index.jsp";
+                    }
                 } else {
                     $("#loginAlert").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
                         "  Incorrect username or login!\n" +

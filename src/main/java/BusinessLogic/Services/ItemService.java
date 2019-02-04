@@ -264,5 +264,28 @@ public class ItemService {
         return (LinkedList<OrderEnt>)entityManager.createQuery("select e from OrderEnt e  where e.status <> 'Fulfilled' ").getResultList();
     }
 
+
+    public String getPersonOccupation(int id){
+
+         Employee employee = new Employee();
+         try {
+             employee = (Employee) entityManager.createQuery("select e from Employee e where e.person.Id = " + id).getSingleResult();
+         }catch (Exception e){
+             employee = null;
+         }
+
+         String occupation;
+         if(employee == null)
+             occupation = "No occupation";
+         else {
+             if((employee.getOccupation() == null)||(employee.getOccupation().length() == 0)||(employee.getOccupation().isEmpty()))
+                 occupation = "Unknown occupation";
+             else
+                 occupation = employee.getOccupation();
+         }
+
+         return  occupation;
+    }
+
 }
 
