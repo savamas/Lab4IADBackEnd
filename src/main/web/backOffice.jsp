@@ -21,7 +21,9 @@
 <body style="background-color: #FFF6F5">
 
 <nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
-    <a class="navbar-brand" href="index.jsp">Выдержка</a>
+    <a class="navbar-brand" href="index.jsp">
+        <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -40,19 +42,17 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" id="wholePage">
     <div class="row">
-        <div class="col-sm">
-        </div>
-        <div class="col-sm">
+        <div class="col-sm" style="margin-top: 10px">
             <div class="list-group" id="unclaimedOrders">
             </div>
         </div>
-        <div class="col-sm">
-            <label for="orderToProcess">Введите номер заказа на обработку:</label>
-            <input type="number" class="form-control" id="orderToProcess" placeholder="Номер заказа" required>
+        <div  id="orderPicker" class="col-sm" style="margin-top: 20px">
+            <label for="orderToProcess"><h3>Введите номер заказа на обработку:</h3></label>
+            <input type="number" class="form-control" id="orderToProcess" placeholder="Номер заказа" required min="1">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 10px; margin-bottom: 10px">
                 Забрать себе
             </button>
 

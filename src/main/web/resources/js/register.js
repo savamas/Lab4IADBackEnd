@@ -21,7 +21,7 @@ $('document').ready(function () {
             success: function (data) {
                 if (data.registerStatus !== undefined) {
                     $("#registerAlert").append("<div class=\"alert alert-success\" role=\"alert\">\n" +
-                        "  Registration successful!\n" +
+                        "  Регистрация прошла успешна!\n" +
                         "</div>");
                     window.location = "http://localhost:8080/Lab4IADBackEnd_Web_exploded/login.jsp";
                 } else {

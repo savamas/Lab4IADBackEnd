@@ -13,5 +13,6 @@ public class ItemTypeDTO {
     String name;
     String url;
     Double price;
+    String description;
 
 }

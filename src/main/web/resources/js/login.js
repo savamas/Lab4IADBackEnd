@@ -19,7 +19,7 @@ $('document').ready(function () {
             success: function (data) {
                 if (data.token !== undefined) {
                     $("#loginAlert").append("<div class=\"alert alert-success\" role=\"alert\">\n" +
-                        "  Authorization successful!\n" +
+                        "  Авторизация прошла успешна!\n" +
                         "</div>");
                     window.localStorage.setItem('token', data.token);
                     //window.localStorage.setItem('occupation', data.occupation);
@@ -30,7 +30,7 @@ $('document').ready(function () {
                     }
                 } else {
                     $("#loginAlert").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
-                        "  Incorrect username or login!\n" +
+                        "  Неправильный логин или пароль!\n" +
                         "</div>");
                 }
             }

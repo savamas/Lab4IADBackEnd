@@ -22,7 +22,9 @@
 <body style="background-color: #FFF6F5">
 
 <nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
-    <a class="navbar-brand" href="index.jsp">Выдержка</a>
+    <a class="navbar-brand" href="index.jsp">
+        <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -46,7 +48,7 @@
     </div>
 </nav>
 
-<div id="concreteItemShow">
+<div id="concreteItemShow" style="margin-top: 30px">
 </div>
 
 </body>

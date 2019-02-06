@@ -20,7 +20,9 @@
 </head>
 <body style="background-color: #FFF6F5">
 <nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
-    <a class="navbar-brand" href="index.jsp">Выдержка</a>
+    <a class="navbar-brand" href="index.jsp">
+        <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,16 +46,16 @@
     </div>
 </nav>
 
-<div class="container-fluid" style="margin: 20px">
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6" id="orders">
+<%--<div class="container-fluid" style="margin: 20px">--%>
+    <%--<div class="row">--%>
+        <%--<div class="col-3"></div>--%>
+        <div class="col-lg" id="orders" style="margin-left: 36%;">
             <ul class="list-unstyled" id="itemsInOrder">
             </ul>
         </div>
-        <div class="col-3"></div>
-    </div>
-</div>
+        <%--<div class="col-3"></div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 </body>
 </html>

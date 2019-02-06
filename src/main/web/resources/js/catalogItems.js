@@ -22,7 +22,7 @@ $('document').ready(function () {
         .done(function (data) {
             for (i = 0; i < data.length; i++) {
                 var filterValuesTmp = data[i].filterValues;
-                var str = '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 300px; text-align: center; color: black; background-color: #FFF6F5">\n';
+                var str = '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px; text-align: center; color: black; background-color: #FFF6F5">\n';
                 for (j = 0; j < filterValuesTmp.length; j++) {
                     var str = str + '<div class="form-check">\n' +
                         '  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="' + data[i].filterName + ' ' + filterValuesTmp[j] + '" onclick="test(this)">\n' +
@@ -32,7 +32,7 @@ $('document').ready(function () {
                 str = str + '</div>';
                 $('#listOfFilters').append('<div class="row" style="margin-bottom: 30px;">\n' +
                     '<div class="dropdown">\n' +
-                    '  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 300px; background-color: #FFF2CD; color: black; font-style: oblique; font-size: x-large">\n' +
+                    '  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 500px; background-color: #FFF2CD; color: black; font-size: xx-large; font-weight: normal">\n' +
                     data[i].filterName +
                     '  </button>\n' + str +
                 '</div>');
@@ -55,11 +55,12 @@ $('document').ready(function () {
             dataToSave = [];
             for (i = 0; i < data.length; i++) {
                 dataToSave[i] = data[i];
-                $('#filteredItems').append('<li class="media">\n' +
-                    '                    <img class="mr-3" src="' + data[i].url + '" width="200px" alt="Generic placeholder image">\n' +
+                $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
+                    '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image">\n' +
                     '                    <div class="media-body">\n' +
-                    '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
-                    '                        Стоимость: ' + data[i].price +  '\n' +
+                    '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                    '                        <hr>\n' +
+                    '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                     '                    </div>\n' +
                     '                </li>');
             }
@@ -86,11 +87,12 @@ $('document').ready(function () {
                 dataToSave = [];
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
-                    $('#filteredItems').append('<li class="media">\n' +
-                        '                    <img class="mr-3" src="' + data[i].url + '" width="200px" alt="Generic placeholder image">\n' +
+                    $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
+                        '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image">\n' +
                         '                    <div class="media-body">\n' +
-                        '                        <a href="concreteItem.jsp"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
-                        '                        Стоимость: ' + data[i].price +  '\n' +
+                        '                        <a href="concreteItem.jsp"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                        '                        <hr>\n' +
+                        '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                         '                    </div>\n' +
                         '                </li>');
                 }
@@ -141,11 +143,12 @@ $('document').ready(function () {
                 dataToSave =[];
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
-                    $('#filteredItems').append('<li class="media">\n' +
-                        '                    <img class="mr-3" src="' + data[i].url + '" width="200px" alt="Generic placeholder image">\n' +
+                    $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
+                        '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image">\n' +
                         '                    <div class="media-body">\n' +
-                        '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
-                        '                        Стоимость: ' + data[i].price +  '\n' +
+                        '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                        '                        <hr>\n' +
+                        '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                         '                    </div>\n' +
                         '                </li>');
                 }

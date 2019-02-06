@@ -19,8 +19,8 @@ public class OrderDTO {
     private String paymentStatus;
     private String deliveryType;
     private String deliveryStatus;
-    private Date dateCreated;
-    private Date dateReceived;
+    private String dateCreated;
+    private String dateReceived;
     private String phoneNum;
 
 

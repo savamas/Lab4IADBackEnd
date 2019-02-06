@@ -38,7 +38,7 @@ public class OrderResource {
     @EJB
     private OrderService orderService;
 
-    @EJB
+    @Inject
     private ItemService itemService;
 
     @Inject
@@ -178,12 +178,15 @@ try {
         addition.setStartDate(newDate);
         List<OrderItem> newItems = (LinkedList<OrderItem>)session.getAttribute("items");
 
+        OrderItem toRemove = new OrderItem();
         for ( OrderItem item: newItems) {
             if(item.getItemType().getName().equals(addition.getItemType().getName())){
                 addition.setAmount(addition.getAmount()+item.getAmount());
-                newItems.remove(item);
+                toRemove = item;
+
             }
         }
+        newItems.remove(toRemove);
         newItems.add(addition);
 
         session.setAttribute("items",newItems);
@@ -287,12 +290,27 @@ try {
 
         for (OrderEnt orderEnt: orders) {
 
+            SimpleDateFormat oldDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setId(orderEnt.getId());
-            orderDTO.setDateCreated(orderEnt.getDateCreated());
-            orderDTO.setDateReceived(orderEnt.getDateReceived());
+            Optional<Date> dateCrOpt = Optional.of(orderEnt.getDateCreated());
+            Optional<Date> dateRcOpt = Optional.of(orderEnt.getDateCreated());
+
+            if (!dateCrOpt.isPresent())
+                orderDTO.setDateCreated("Не указано");
+            else
+                orderDTO.setDateCreated(oldDateFormat.format(orderEnt.getDateCreated()));
+
+            if(!dateRcOpt.isPresent()||orderEnt.getDateReceived()==null)
+                orderDTO.setDateReceived("Не известно");
+            else{
+
+                orderDTO.setDateReceived(oldDateFormat.format(orderEnt.getDateReceived()));
+            }
+
             orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
             orderDTO.setPaymentType(orderEnt.getPaymentType());
+            orderDTO.setDeliveryStatus(orderEnt.getDeliveryStatus());
             orderDTO.setDeliveryType(orderEnt.getDeliveryType());
             if(orderEnt.getStatus() == null)
             {
@@ -380,14 +398,16 @@ try {
         List<OrderDTO> resultList = new LinkedList<>();
         Gson gson = new Gson();
 
+        SimpleDateFormat oldDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
         for (OrderEnt orderEnt: orders) {
 
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setId(orderEnt.getId());
-            orderDTO.setDateCreated(orderEnt.getDateCreated());
+            orderDTO.setDateCreated(oldDateFormat.format(orderEnt.getDateCreated()));
             orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
             orderDTO.setPaymentType(orderEnt.getPaymentType());
             orderDTO.setDeliveryType(orderEnt.getDeliveryType());
+            orderDTO.setDeliveryStatus(orderEnt.getDeliveryStatus());
 
             if(orderEnt.getStatus() == null)
             {
@@ -429,18 +449,19 @@ try {
 
         List<OrderDTO> resultList = new LinkedList<>();
         resultList.clear();
-
+        SimpleDateFormat oldDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
         Gson gson = new Gson();
 
         for (OrderEnt orderEnt: orders) {
 
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setId(orderEnt.getId());
-            orderDTO.setDateCreated(orderEnt.getDateCreated());
+            orderDTO.setDateCreated(oldDateFormat.format(orderEnt.getDateCreated()));
             orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
             orderDTO.setPaymentType(orderEnt.getPaymentType());
             orderDTO.setDeliveryType(orderEnt.getDeliveryType());
             orderDTO.setPhoneNum(orderEnt.getCustomer().getPhoneNum());
+            orderDTO.setDeliveryStatus(orderEnt.getDeliveryStatus());
 
             if(orderEnt.getStatus() == null)
             {
@@ -456,5 +477,32 @@ try {
 
         return Response.ok().entity(gson.toJson(resultList)).build();
     }
+
+    @POST
+    @Path("/getOrder")
+    public Response getOrder (String content, @Context HttpServletRequest request) {
+
+        OrderDTO orderDTO = new OrderDTO();
+
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement elem = jsonParser.parse(content);
+        JsonObject obj = elem.getAsJsonObject();
+        JsonElement orderId = obj.get("id");
+
+        OrderEnt orderEnt = orderService.findOrder(orderId.getAsInt());
+
+        orderDTO.setPaymentStatus(orderEnt.getPaymentStatus());
+        orderDTO.setPaymentType(orderEnt.getPaymentType());
+        orderDTO.setDeliveryStatus(orderEnt.getDeliveryStatus());
+        orderDTO.setDeliveryType(orderEnt.getDeliveryType());
+
+        return Response.ok().entity(gson.toJson(orderDTO)).build();
+    }
+
+
+
+
+
 
 }

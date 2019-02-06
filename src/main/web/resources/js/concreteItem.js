@@ -113,13 +113,13 @@ $('document').ready(function () {
                     '  </div>\n' +
                     '</div>';
             }
-            $('#concreteItemShow').append('<div class="card" style="width: 25rem; background-color: #FFF2CD; text-align: center; margin: auto">\n' +
-                '    <img class="card-img-top" src="' + data.url + '" alt="Card image cap" width="300px">\n' +
+            $('#concreteItemShow').append('<div class="card" style="width: 27rem; background-color: #FFF2CD; text-align: center; margin: auto;">\n' +
+                '    <img class="card-img-top" src="' + data.url + '" alt="Card image cap" width="320px">\n' +
                 '  <div class="card-body">\n' +
                 '        <h1 class="display-4">' + data.name + '</h1>\n' +
                 '        <hr class="my-4">\n' +
-                '        <p>Цена: ' + data.price + '</p>\n' +
-                '        <p>Here will be definition!</p>\n' + str +
+                '        <p style="font-size: x-large;">Цена: ' + data.price + '</p>\n' +
+                '                        <p style="font-size: x-large">Описание: ' + data.description +  '</p>\n' + + str +
                 '  </div>\n' +
                 '</div>');
         })

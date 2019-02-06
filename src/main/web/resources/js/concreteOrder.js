@@ -15,23 +15,25 @@ $('document').ready(function () {
         contentType: "application/json; charset=utf-8"
     })
         .done(function (data) {
-                for (i = 0; i < data.length; i++) {
+            for (i = 0; i < data.length; i++) {
                     if (data[i].date != "") {
-                        $('#itemsInOrder').append('<li class="media">\n' +
-                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image">\n' +
+                        $('#itemsInOrder').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
+                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px;">\n' +
                             '                    <div class="media-body">\n' +
-                            '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
-                            '                        Стоимость: ' + data[i].price +  '\n' +
-                            '                        Дата: ' + data[i].date +  '\n' +
+                            '                        <h2 class="mt-0 mb-1">' + data[i].name +  '</h2>\n' +
+                            '                        <hr>\n' +
+                            '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '\n' +
+                            '                        <br>Дата: ' + data[i].date +  '</p>\n' +
                             '                    </div>\n' +
                             '                </li>');
                     } else {
-                        $('#itemsInOrder').append('<li class="media">\n' +
-                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image">\n' +
+                        $('#itemsInOrder').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
+                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px;">\n' +
                             '                    <div class="media-body">\n' +
-                            '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h3 class="mt-0 mb-1">' + data[i].name +  '</h3></a>\n' +
-                            '                        Стоимость: ' + data[i].price +  '\n' +
-                            '                        Количество: ' + data[i].amount +  '\n' +
+                            '                        <h2 class="mt-0 mb-1">' + data[i].name +  '</h2>\n' +
+                            '                        <hr>\n' +
+                            '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '\n' +
+                            '                        <br>Количество: ' + data[i].amount +  '</p>\n' +
                             '                    </div>\n' +
                             '                </li>');
                     }

@@ -164,6 +164,7 @@ public class CatalogueResource {
         dto.setName(item.getName());
         dto.setUrl(item.getImageUrl());
         dto.setId(item.getId());
+        dto.setDescription(itemService.getItemDescription(item));
         dto.setPrice(item.getPrice());
 
         return Response.ok().entity(gson.toJson(dto)).build();

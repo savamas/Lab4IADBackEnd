@@ -20,7 +20,9 @@
 <body style="background-color: #FFF6F5">
 
 <nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
-    <a class="navbar-brand" href="index.jsp">Выдержка</a>
+    <a class="navbar-brand" href="index.jsp">
+        <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,52 +44,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-        </div>
-        <div class="col-sm">
+        <div class="col-sm" style="margin-top: 10px">
             <div class="list-group" id="activeOrders">
             </div>
         </div>
-        <div class="col-sm">
-            <label for="orderToChange">Введите номер заказа для изменения статуса:</label>
-            <input type="number" class="form-control" id="orderToChange" placeholder="Номер заказа" required>
+        <div class="col-sm" style="margin-top: 20px" id="orderToPick">
+            <label for="orderToChange"><h3>Введите номер заказа для изменения статуса:</h3></label>
+            <input type="number" class="form-control" id="orderToChange" placeholder="Номер заказа" required min="1">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" id="changeInit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 10px; margin-bottom: 10px">
                 Изменить
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Внесите изменения:</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <label for="payment">Статус оплаты</label>
-                            <select id="payment" class="form-control">
-                                <option selected>Оплачено</option>
-                                <option>Не оплачено</option>
-                            </select>
-                            <label for="delivery">Статус доставки</label>
-                            <select id="delivery" class="form-control">
-                                <option selected>Получено</option>
-                                <option>Собирается</option>
-                                <option>Готово к доставке</option>
-                                <option>Готово к выдаче</option>
-                                <option>Завершено</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                            <button type="button" class="btn btn-primary" id="confirmChange">Подтвердить</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>

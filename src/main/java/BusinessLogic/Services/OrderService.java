@@ -30,7 +30,8 @@ public class OrderService {
         order.setPaymentType(paymentType);
         order.setPaymentStatus(paymentStatus);
         order.setDeliveryType(deliveryType);
-        order.setDeliveryStatus("Received");
+        order.setDeliveryStatus("В обработке");
+        order.setStatus("В обработке");
         Date dat = new Date();
         order.setDateCreated(dat);
         entityManager.persist(order);

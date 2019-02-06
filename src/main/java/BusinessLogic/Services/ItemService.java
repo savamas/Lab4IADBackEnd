@@ -287,5 +287,31 @@ public class ItemService {
          return  occupation;
     }
 
+    public List<Property> getItemProperties( int id){
+        return (List<Property>)entityManager.createQuery("select e from Property e where e.itemType.Id ="+id).getResultList();
+    }
+
+    public String getItemDescription(ItemType item){
+        List<Property> properties = getItemProperties(item.getId());
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Property prop: properties) {
+            stringBuilder.append(prop.getName());
+            stringBuilder.append(": ");
+            stringBuilder.append(prop.getValue());
+            stringBuilder.append("\n");
+        }
+
+
+        if(item.getDescription() == null || item.getDescription().length() == 0)
+            stringBuilder.append("\n\nНет описания");
+        else {
+
+            stringBuilder.append("\n\nОписание: \n");
+            stringBuilder.append(item.getDescription());
+        }
+
+        return stringBuilder.toString();
+    }
+
 }
 

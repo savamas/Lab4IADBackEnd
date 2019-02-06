@@ -5,10 +5,11 @@ $('document').ready(function () {
         contentType: "application/json; charset=utf-8",
     })
         .done(function (data) {
-                $('#personInfo').append('<div class="card" style="width: 500px; text-align: center">\n' +
+                $('#personInfo').append('<div class="card" style="width: 500px; text-align: center; background-color: #FFF2CD">\n' +
                     '                <div class="card-body">\n' +
-                    '                    <h5 class="card-title">' + data.firstName + ' ' + data.lastName + '</h5>\n' +
-                    '                    <p class="card-text">Почта: ' + data.username + ' Телефон: ' + data.phoneNum + '</p>\n' +
+                    '                    <h2 class="card-title">' + data.firstName + ' ' + data.lastName + '</h2>\n' +
+                    '                    <hr>\n' +
+                    '                    <p class="card-text" style="font-size: x-large">Почта: ' + data.username + '<br> Телефон: ' + data.phoneNum + '</p>\n' +
                     '                    <button type="button" class="btn btn-danger" onclick="leaveAccount()" style="margin: 20px; text-align: center">Выйти</button>\n' +
                     '                </div>\n' +
                     '            </div>');
@@ -24,12 +25,13 @@ $('document').ready(function () {
     })
         .done(function (data) {
             for (i = 0; i < data.length; i++) {
-                $('#personOrders').append('<a href="concreteOrder.jsp" onclick="orderClick(this.innerHTML)" class="list-group-item list-group-item-action flex-column align-items-start">\n' +
+                $('#personOrders').append('<a href="concreteOrder.jsp" onclick="orderClick(this.innerHTML)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: #FFF2CD; text-align: center; margin-top: 10px; width: 550px">\n' +
                     '                    <div class="d-flex w-100 justify-content-between">\n' +
-                    '                        <h5 class="mb-1">Заказ №' + data[i].Id + ' от ' + data[i].dateCreated + '</h5>\n' +
+                    '                        <h3 class="mb-1" style="text-align: center">Заказ №' + data[i].Id + ' от ' + data[i].dateCreated + '</h3>\n' +
                     '                    </div>\n' +
-                    '                    <p class="mb-1">Тип оплаты: ' + data[i].paymentType + ' Статус оплаты: ' + data[i].paymentStatus + ' Тип доставки: ' + data[i].deliveryType + ' Статус доставки: ' + data[i].deliveryStatus + '</p>\n' +
-                    '                    <small>Дата получения: ' + data[i].dateReceived + '</small>\n' +
+                    '                    <hr>\n' +
+                    '                    <p style="font-size: x-large" class="mb-1">Тип оплаты: ' + data[i].paymentType + ';<br> Статус оплаты: ' + data[i].paymentStatus + ';<br> Тип доставки: ' + data[i].deliveryType + ';<br> Статус доставки: ' + data[i].deliveryStatus + ';</p>\n' +
+                    '                    <small style="font-size: x-large">Дата получения: ' + data[i].dateReceived + '</small>\n' +
                     '                </a>');
             }
         })
@@ -44,7 +46,7 @@ function leaveAccount() {
 }
 
 function orderClick(e) {
-    var res = e.substring(120);
+    var res = e.substring(147);
     res = res.substring(0, res.indexOf(' '));
     window.localStorage.setItem('selectedOrderId', res);
 }

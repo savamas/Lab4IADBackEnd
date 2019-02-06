@@ -17,7 +17,9 @@
 <body style="background-color: #FFF6F5">
 
 <nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
-    <a class="navbar-brand" href="index.jsp">Выдержка</a>
+    <a class="navbar-brand" href="index.jsp">
+        <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -45,14 +47,13 @@
     </div>
 </nav>
 
-<div class="container-fluid" style="margin: 20px">
+<div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-md" style="margin-left: auto; margin-top: 30px">
             <div id="listOfFilters"></div>
-            <button type="button" class="btn btn-success" id="filter" style="margin: 20px; text-align: center">Отфильтровать</button>
+            <button type="button" class="btn btn-success" id="filter" style="margin-left: 177px; text-align: center">Отфильтровать</button>
         </div>
-        <div class="col-3"></div>
-        <div class="col-6">
+        <div class="col-md" style="margin-top: 20px">
             <ul class="list-unstyled" id="filteredItems">
             </ul>
         </div>
