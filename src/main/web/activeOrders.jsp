@@ -50,15 +50,23 @@
         </div>
         <div class="col-sm" style="margin-top: 20px" id="orderToPick">
             <label for="orderToChange"><h3>Введите номер заказа для изменения статуса:</h3></label>
-            <input type="number" class="form-control" id="orderToChange" placeholder="Номер заказа" required min="1">
-            <!-- Button trigger modal -->
-            <button type="button" id="changeInit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 10px; margin-bottom: 10px">
+            <input type="number" class="form-control" id="orderToChange" placeholder="Номер заказа" required min="1" style="margin-bottom: 10px">
+            <label for="payment"><h3>Укажите новый статус оплаты: </h3></label>
+            <select id="payment" class="form-control" style="margin-bottom: 10px">
+                <option>Оплачен</option>
+                <option>Не оплачен</option>
+            </select>
+            <label for="delivery"><h3>Укажите новый статус доставки: </h3></label>
+            <select id="delivery" class="form-control" style="margin-bottom: 10px">
+                <option>В обработке</option>
+                <option>Собирается</option>
+                <option>Готово к доставке</option>
+                <option>Готово к выдаче</option>
+                <option>Завершено</option>
+            </select>
+            <button type="button" id="changeInit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px">
                 Изменить
             </button>
-
-            <!-- Modal -->
-            <%--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-            <%--</div>--%>
         </div>
     </div>
 </div>

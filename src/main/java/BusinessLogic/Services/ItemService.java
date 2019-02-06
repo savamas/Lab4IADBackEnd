@@ -302,13 +302,13 @@ public class ItemService {
         }
 
 
-        if(item.getDescription() == null || item.getDescription().length() == 0)
+       /* if(item.getDescription() == null || item.getDescription().length() == 0)
             stringBuilder.append("\n\nНет описания");
         else {
 
             stringBuilder.append("\n\nОписание: \n");
             stringBuilder.append(item.getDescription());
-        }
+        }*/
 
         return stringBuilder.toString();
     }

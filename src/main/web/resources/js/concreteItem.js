@@ -119,7 +119,7 @@ $('document').ready(function () {
                 '        <h1 class="display-4">' + data.name + '</h1>\n' +
                 '        <hr class="my-4">\n' +
                 '        <p style="font-size: x-large;">Цена: ' + data.price + '</p>\n' +
-                '                        <p style="font-size: x-large">Описание: ' + data.description +  '</p>\n' + + str +
+                '                        <p style="font-size: x-large">Описание: ' + data.description +  '</p>\n' + str +
                 '  </div>\n' +
                 '</div>');
         })
