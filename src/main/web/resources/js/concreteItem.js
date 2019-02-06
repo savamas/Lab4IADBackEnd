@@ -114,7 +114,7 @@ $('document').ready(function () {
                     '</div>';
             }
             $('#concreteItemShow').append('<div class="card" style="width: 27rem; background-color: #FFF2CD; text-align: center; margin: auto;">\n' +
-                '    <img class="card-img-top" src="' + data.url + '" alt="Card image cap" width="320px">\n' +
+                '    <img class="card-img-top" src="' + data.url + '" alt="Card image cap" width="320px" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                 '  <div class="card-body">\n' +
                 '        <h1 class="display-4">' + data.name + '</h1>\n' +
                 '        <hr class="my-4">\n' +

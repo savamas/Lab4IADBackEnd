@@ -42,7 +42,7 @@
     <%--<ul class="list-group" id="listOfCategories" style="margin: 20px">--%>
     <%--</ul>--%>
 
-    <div class="card-deck" id="listOfCategories" style="margin: 20px">
+    <div class="card-deck" id="listOfCategories" style="margin-top: 100px; margin-left: 20px; margin-right: 20px">
     </div>
 
 </body>

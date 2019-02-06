@@ -22,7 +22,7 @@ $('document').ready(function () {
                 for (i = 0; i < data.length; i++) {
                     if (data[i].date != "") {
                         $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
-                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px;">\n' +
+                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                             '                    <div class="media-body">\n' +
                             '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                             '                        <hr>\n' +
@@ -34,7 +34,7 @@ $('document').ready(function () {
                             '                </li>');
                     } else {
                         $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
-                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px;">\n' +
+                            '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                             '                    <div class="media-body">\n' +
                             '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                             '                        <hr>\n' +
@@ -171,7 +171,7 @@ function deleteItemFromCart(e){
                         for (i = 0; i < data.length; i++) {
                             if (data[i].date != "") {
                                 $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
-                                    '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px;">\n' +
+                                    '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                                     '                    <div class="media-body">\n' +
                                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                                     '                        <hr>\n' +
@@ -183,7 +183,7 @@ function deleteItemFromCart(e){
                                     '                </li>');
                             } else {
                                 $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
-                                    '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px;">\n' +
+                                    '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                                     '                    <div class="media-body">\n' +
                                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                                     '                        <hr>\n' +

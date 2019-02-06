@@ -56,7 +56,7 @@ $('document').ready(function () {
             for (i = 0; i < data.length; i++) {
                 dataToSave[i] = data[i];
                 $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
-                    '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image">\n' +
+                    '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '                    <div class="media-body">\n' +
                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                     '                        <hr>\n' +
@@ -88,7 +88,7 @@ $('document').ready(function () {
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
                     $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
-                        '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image">\n' +
+                        '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                         '                    <div class="media-body">\n' +
                         '                        <a href="concreteItem.jsp"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                         '                        <hr>\n' +
@@ -144,7 +144,7 @@ $('document').ready(function () {
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
                     $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
-                        '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image">\n' +
+                        '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                         '                    <div class="media-body">\n' +
                         '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                         '                        <hr>\n' +

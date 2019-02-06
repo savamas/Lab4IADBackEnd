@@ -15,8 +15,8 @@ $('document').ready(function () {
         .done(function (data) {
             for (i = 0; i < data.length; i++) {
                 dataTmp[i] = data[i];
-                $('#listOfCategories').append('<div class="card" style="width: 18rem; height: 180px;">\n' +
-                    '    <img class="card-img-top" src="' + data[i].imageUrl + '" alt="Card image cap">\n' +
+                $('#listOfCategories').append('<div class="card" style="width: 18rem; height: 180px; margin-bottom: 220px">\n' +
+                    '    <img class="card-img-top" src="' + data[i].imageUrl + '" alt="Card image cap" style="height: 300px; object-fit: cover; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '    <div class="card-body" style="text-align: center; background-color: #FFF2CD; font-size: xx-large; font-style: oblique">\n' +
                     '      <a href="catalogItems.jsp" onClick="linkClicked(this.innerHTML)"><h2 class="card-title">' + data[i].name + '</h2></a>\n' +
                     '    </div>\n' +
