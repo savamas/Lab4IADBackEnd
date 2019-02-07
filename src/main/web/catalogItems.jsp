@@ -51,10 +51,10 @@
     <div class="row">
         <div class="col-md" style="margin-left: auto; margin-top: 30px">
             <div id="listOfFilters"></div>
-            <button type="button" class="btn btn-success" id="filter" style="margin-left: 177px; text-align: center">Отфильтровать</button>
+            <button type="button" class="btn btn-success" id="filter" style="margin-left: 177px; text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Отфильтровать</button>
         </div>
-        <div class="col-md" style="margin-top: 20px">
-            <ul class="list-unstyled" id="filteredItems">
+        <div class="col-md" style="margin-top: 20px;">
+            <ul class="list-inline" id="filteredItems">
             </ul>
         </div>
     </div>

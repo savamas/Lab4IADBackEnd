@@ -29,7 +29,7 @@ $('document').ready(function () {
             if (data.length != 0) {
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
-                    $('#unclaimedOrders').append('<div class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: #FFF2CD; text-align: center; margin-top: 10px;">\n' +
+                    $('#unclaimedOrders').append('<div class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: #FFF2CD; text-align: center; margin-top: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                         '                    <div class="d-flex w-100 justify-content-between">\n' +
                         '                        <h3 class="mb-1" style="text-align: center">Заказ №' + data[i].Id + ' от ' + data[i].dateCreated + '</h3>\n' +
                         '                    </div>\n' +
@@ -39,7 +39,7 @@ $('document').ready(function () {
                 }
             } else {
                 $("#wholePage").empty();
-                $("#wholePage").append('<div class="jumbotron" style="background-color: #FFF2CD; margin-top: 20px">\n' +
+                $("#wholePage").append('<div class="jumbotron" style="background-color: #FFF2CD; margin-top: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '  <h1 class="display-4">Ожидайте!</h1>\n' +
                     '  <p class="lead" style="font-size: x-large">В данный момент заказов на обработку не поступало.</p>\n' +
                     '  <hr class="my-4">\n' +

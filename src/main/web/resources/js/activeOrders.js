@@ -27,7 +27,7 @@ $('document').ready(function () {
             dataToSave = [];
             for (i = 0; i < data.length; i++) {
                 dataToSave[i] = data[i];
-                $('#activeOrders').append('<div class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: #FFF2CD; text-align: center; margin-top: 10px;">\n' +
+                $('#activeOrders').append('<div class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: #FFF2CD; text-align: center; margin-top: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '                    <div class="d-flex w-100 justify-content-between">\n' +
                     '                        <h3 class="mb-1" style="text-align: center">Заказ №' + data[i].Id + ' от ' + data[i].dateCreated + '</h3>\n' +
                     '                    </div>\n' +

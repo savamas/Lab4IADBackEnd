@@ -6,6 +6,7 @@
     <%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>--%>
     <%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
     <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>--%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="resources/js/register.js"></script>
 </head>
@@ -41,21 +42,31 @@
 
 <div id="registerAlert"></div>
 
-<form style="margin: 20px" id="registerFormSubmit">
+<form style="margin: 50px; background-color: #FFF2CD; padding: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="registerFormSubmit">
     <div class="form-row">
         <div class="col-md-4 mb-3">
-            <label for="firstName">Имя</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Ваше имя" required>
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="lastName">Фамилия</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Ваша фамилия" required>
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="username">Логин</label>
+            <label for="firstName"><h3>Имя</h3></label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                    <span class="input-group-text" id="inputGroupPrepend8"><i class="fas fa-user-circle"></i></span>
+                </div>
+                <input type="text" class="form-control" id="firstName" placeholder="Ваше имя" required>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="lastName"><h3>Фамилия</h3></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend7"><i class="far fa-user-circle"></i></span>
+                </div>
+                <input type="text" class="form-control" id="lastName" placeholder="Ваша фамилия" required>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="username"><h3>Логин</h3></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"><i class="fas fa-envelope"></i></span>
                 </div>
                 <input type="email" class="form-control" id="username" placeholder="Логин" aria-describedby="inputGroupPrepend2" required>
             </div>
@@ -63,19 +74,34 @@
     </div>
     <div class="form-row">
         <div class="col-md-5 mb-3">
-            <label for="password">Пароль</label>
-            <input type="password" class="form-control" id="password" placeholder="Пароль" required minlength="6">
+            <label for="password"><h3>Пароль</h3></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3"><i class="fas fa-key"></i></span>
+                </div>
+                <input type="password" class="form-control" id="password" placeholder="Пароль" required minlength="6">
+            </div>
         </div>
         <div class="col-md-5 mb-3">
-            <label for="number">Номер телефона</label>
-            <input type="number" class="form-control" id="number" placeholder="Номер телефона" required>
+            <label for="number"><h3>Номер телефона</h3></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend32"><i class="fas fa-phone-square"></i></span>
+                </div>
+                <input type="number" class="form-control" id="number" placeholder="Номер телефона" required>
+            </div>
         </div>
         <div class="col-md-2 mb-3">
-            <label for="sex">Пол</label>
-            <select id="sex" class="form-control">
-                <option selected>Мужской</option>
-                <option>Женский</option>
-            </select>
+            <label for="sex"><h3>Пол</h3></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend312"><i class="fas fa-skull-crossbones"></i></span>
+                </div>
+                <select id="sex" class="form-control">
+                    <option selected>Мужской</option>
+                    <option>Женский</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -86,7 +112,7 @@
             </label>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+    <button class="btn btn-primary" type="submit" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Зарегистрироваться</button>
 </form>
 
 </body>

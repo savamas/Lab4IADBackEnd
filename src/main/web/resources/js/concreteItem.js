@@ -66,7 +66,7 @@ $('document').ready(function () {
                     })
 
                 //alert("TUPOI");
-                str = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">\n' +
+                str = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '  Добавить в корзину\n' +
                     '</button>\n' +
                     '\n' +
@@ -89,7 +89,7 @@ $('document').ready(function () {
                     '  </div>\n' +
                     '</div>';
             } else {
-                str = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">\n' +
+                str = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '  Добавить в корзину\n' +
                     '</button>\n' +
                     '\n' +
@@ -113,9 +113,9 @@ $('document').ready(function () {
                     '  </div>\n' +
                     '</div>';
             }
-            $('#concreteItemShow').append('<div class="card" style="width: 27rem; background-color: #FFF2CD; text-align: center; margin: auto;">\n' +
+            $('#concreteItemShow').append('<div class="card" style="width: 27rem; text-align: center; margin: auto;">\n' +
                 '    <img class="card-img-top" src="' + data.url + '" alt="Card image cap" width="320px" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                '  <div class="card-body">\n' +
+                '  <div class="card-body" style=" background-color: #FFF2CD; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-top: 8px">\n' +
                 '        <h1 class="display-4">' + data.name + '</h1>\n' +
                 '        <hr class="my-4">\n' +
                 '        <p style="font-size: x-large;">Цена: ' + data.price + '</p>\n' +

@@ -32,7 +32,7 @@ $('document').ready(function () {
                 str = str + '</div>';
                 $('#listOfFilters').append('<div class="row" style="margin-bottom: 30px;">\n' +
                     '<div class="dropdown">\n' +
-                    '  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 500px; background-color: #FFF2CD; color: black; font-size: xx-large; font-weight: normal">\n' +
+                    '  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 500px; background-color: #FFF2CD; color: black; font-size: xx-large; font-weight: normal;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     data[i].filterName +
                     '  </button>\n' + str +
                 '</div>');
@@ -55,9 +55,9 @@ $('document').ready(function () {
             dataToSave = [];
             for (i = 0; i < data.length; i++) {
                 dataToSave[i] = data[i];
-                $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
+                $('#filteredItems').append('<li class="media list-inline-item" style="margin-top: 10px; text-align: center; width: 600px">\n' +
                     '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                    '                    <div class="media-body">\n' +
+                    '                    <div class="media-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD; height: 220px;">\n' +
                     '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                     '                        <hr>\n' +
                     '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
@@ -87,9 +87,9 @@ $('document').ready(function () {
                 dataToSave = [];
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
-                    $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
+                    $('#filteredItems').append('<li class="media" style="margin-top: 10px; text-align: center; width: 600px">\n' +
                         '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                        '                    <div class="media-body">\n' +
+                        '                    <div class="media-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD; height: 220px;">\n' +
                         '                        <a href="concreteItem.jsp"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                         '                        <hr>\n' +
                         '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
@@ -143,9 +143,9 @@ $('document').ready(function () {
                 dataToSave =[];
                 for (i = 0; i < data.length; i++) {
                     dataToSave[i] = data[i];
-                    $('#filteredItems').append('<li class="media" style="margin-top: 10px; background-color: #FFF2CD; text-align: center">\n' +
+                    $('#filteredItems').append('<li class="media" style="margin-top: 10px; text-align: center; width: 600px">\n' +
                         '                    <img class="mr-3" src="' + data[i].url + '" width="250px" height="220px" alt="Generic placeholder image" style=" border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                        '                    <div class="media-body">\n' +
+                        '                    <div class="media-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD; height: 220px;">\n' +
                         '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
                         '                        <hr>\n' +
                         '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +

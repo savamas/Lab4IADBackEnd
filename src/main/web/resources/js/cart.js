@@ -12,7 +12,7 @@ $('document').ready(function () {
     })
         .done(function (data) {
             if (data == "No Items") {
-                $('#itemsInCart').append('<div class="jumbotron" style="background-color: #FFF2CD; width: 600px; margin-top: 20px">\n' +
+                $('#itemsInCart').append('<div class="jumbotron" style="background-color: #FFF2CD; width: 600px; margin-top: 20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '    <h1 class="display-4">Ваша корзина пуста</h1>\n' +
                     '    <p class="lead">Для совершения покупок перейдите в наш каталог</p>\n' +
                     '    <hr class="my-4">\n' +
@@ -21,32 +21,32 @@ $('document').ready(function () {
             } else {
                 for (i = 0; i < data.length; i++) {
                     if (data[i].date != "") {
-                        $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
+                        $('#itemsInCart').append('<li class="media" style="margin-top: 10px; width: 750px; height: 240px; text-align: center">\n' +
                             '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                            '                    <div class="media-body">\n' +
-                            '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                            '                    <div class="media-body" style="height: 240px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD;">\n' +
+                            '                        <h2 class="mt-0 mb-1">' + data[i].name +  '</h2>\n' +
                             '                        <hr>\n' +
                             '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                             '                        <p style="font-size: x-large">Дата: ' + data[i].date +  '</p>\n' +
                             // '                        <br>\n' +
-                            '        <button type="button" class="btn btn-danger" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
+                            '        <button type="button" class="btn btn-danger" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
                             '                    </div>\n' +
                             '                </li>');
                     } else {
-                        $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
+                        $('#itemsInCart').append('<li class="media" style="margin-top: 10px; width: 750px; height: 240px; text-align: center">\n' +
                             '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                            '                    <div class="media-body">\n' +
-                            '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                            '                    <div class="media-body" style="height: 240px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD;">\n' +
+                            '                        <h2 class="mt-0 mb-1">' + data[i].name +  '</h2>\n' +
                             '                        <hr>\n' +
                             '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                             '                        <p style="font-size: x-large">Количество: ' + data[i].amount +  '</p>\n' +
                             // '                        <br>\n' +
-                            '        <button type="button" class="btn btn-danger" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
+                            '        <button type="button" class="btn btn-danger" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
                             '                    </div>\n' +
                             '                </li>');
                     }
                 }
-                $('#cartConfirmButton').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 220px;">\n' +
+                $('#cartConfirmButton').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 220px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '  Оформить заказ\n' +
                     '</button>\n' +
                     '\n' +
@@ -123,7 +123,7 @@ function confirmOrder() {
         },
         success: function () {
             $("#cartConfirmButton").empty();
-            $('#cartConfirmButton').append('<ul class="list-unstyled" id="itemsInCart"><div class="jumbotron" style="background-color: #FFF2CD; width: 600px; margin-top: 20px">\n' +
+            $('#cartConfirmButton').append('<ul class="list-unstyled" id="itemsInCart"><div class="jumbotron" style="background-color: #FFF2CD; width: 600px; margin-top: 20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                 '    <h1 class="display-4">Ваша корзина пуста</h1>\n' +
                 '    <p class="lead">Для совершения покупок перейдите в наш каталог</p>\n' +
                 '    <hr class="my-4">\n' +
@@ -135,11 +135,11 @@ function confirmOrder() {
 }
 
 function deleteItemFromCart(e){
-    var j = e.innerHTML;
-    var res = j.substring(22);
-    res = res.substring(0, res.length - 5);
+   // var j = e.innerHTML;
+  //  var res = j.substring(22);
+   // res = res.substring(0, res.length - 5);
     var params= {
-        name: res
+        name: e.innerHTML
     };
     $.ajax({
         type: "POST",
@@ -158,7 +158,7 @@ function deleteItemFromCart(e){
                 .done(function (data) {
                     if (data == "No Items") {
                         $("#cartConfirmButton").empty();
-                        $('#cartConfirmButton').append('<ul class="list-unstyled" id="itemsInCart"><div class="jumbotron" style="background-color: #FFF2CD; width: 600px; margin-top: 20px">\n' +
+                        $('#cartConfirmButton').append('<ul class="list-unstyled" id="itemsInCart"><div class="jumbotron" style="background-color: #FFF2CD; width: 600px; margin-top: 20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                             '    <h1 class="display-4">Ваша корзина пуста</h1>\n' +
                             '    <p class="lead">Для совершения покупок перейдите в наш каталог</p>\n' +
                             '    <hr class="my-4">\n' +
@@ -170,32 +170,32 @@ function deleteItemFromCart(e){
                             '            </ul>');
                         for (i = 0; i < data.length; i++) {
                             if (data[i].date != "") {
-                                $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
+                                $('#itemsInCart').append('<li class="media" style="margin-top: 20px; width: 750px; text-align: center">\n' +
                                     '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                                    '                    <div class="media-body">\n' +
-                                    '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                                    '                    <div class="media-body" style="height: 240px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD;">\n' +
+                                    '                        <h2 class="mt-0 mb-1">' + data[i].name + '</h2>\n' +
                                     '                        <hr>\n' +
                                     '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                                     '                        <p style="font-size: x-large">Дата: ' + data[i].date +  '</p>\n' +
                                     // '                        <br>\n' +
-                                    '        <button type="button" class="btn btn-danger" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
+                                    '        <button type="button" class="btn btn-danger" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
                                     '                    </div>\n' +
                                     '                </li>');
                             } else {
-                                $('#itemsInCart').append('<li class="media" style="margin-top: 20px; background-color: #FFF2CD; width: 600px; text-align: center">\n' +
+                                $('#itemsInCart').append('<li class="media" style="margin-top: 20px; width: 750px; text-align: center">\n' +
                                     '                    <img class="mr-3" src="' + data[i].url + '" alt="Generic placeholder image" style="width: 300px; height: 240px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
-                                    '                    <div class="media-body">\n' +
-                                    '                        <a href="concreteItem.jsp" onclick="itemClicked(this.innerHTML)"><h2 class="mt-0 mb-1">' + data[i].name +  '</h2></a>\n' +
+                                    '                    <div class="media-body" style="height: 240px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #FFF2CD;">\n' +
+                                    '                        <h2 class="mt-0 mb-1">' + data[i].name +  '</h2>\n' +
                                     '                        <hr>\n' +
                                     '                        <p style="font-size: x-large">Стоимость: ' + data[i].price +  '</p>\n' +
                                     '                        <p style="font-size: x-large">Количество: ' + data[i].amount +  '</p>\n' +
                                     // '                        <br>\n' +
-                                    '        <button type="button" class="btn btn-danger" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
+                                    '        <button type="button" class="btn btn-danger" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" onclick="deleteItemFromCart(this.parentElement.firstElementChild)">Удалить</button>\n' +
                                     '                    </div>\n' +
                                     '                </li>');
                             }
                         }
-                        $('#cartConfirmButton').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 220px;">\n' +
+                        $('#cartConfirmButton').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 220px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                             '  Оформить заказ\n' +
                             '</button>\n' +
                             '\n' +

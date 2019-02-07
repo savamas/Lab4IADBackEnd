@@ -48,7 +48,7 @@
 
 <%--<div class="container" style="margin: auto;">--%>
     <%--<div class="row">--%>
-        <div class="col-lg" id="cartConfirmButton" style="margin-left: 36%;">
+        <div id="cartConfirmButton" style="margin-left: 36%;">
             <ul class="list-unstyled" id="itemsInCart">
             </ul>
         </div>
