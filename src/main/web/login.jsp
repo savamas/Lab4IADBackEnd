@@ -66,7 +66,7 @@
                         <input type="password" class="form-control" id="userPassword" placeholder="Пароль" minlength="6" required>
                     </div>
                 </div>
-                <div><a href="passwordRecovery.jsp">Забыли пароль?</a></div>
+                <%--<div><a href="passwordRecovery.jsp">Забыли пароль?</a></div>--%>
                 <div><a href="register.jsp">Нет аккаунта? Зарегестрироваться!</a></div>
                 <button type="submit" class="btn btn-primary">Войти</button>
             </form>

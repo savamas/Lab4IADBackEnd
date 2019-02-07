@@ -20,7 +20,7 @@
 </head>
 <body style="background-color: #FFF6F5">
 
-<nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
+<nav class="navbar fixed-top navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
     <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,37 +42,18 @@
 
 <div class="container" id="wholePage">
     <div class="row">
-        <div class="col-sm" style="margin-top: 10px">
+        <div class="col-sm" style="margin-top: 90px">
             <div class="list-group" id="unclaimedOrders">
             </div>
         </div>
-        <div  id="orderPicker" class="col-sm" style="margin-top: 20px; background-color: #FFF2CD; height: 180px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding: 10px">
-            <label for="orderToProcess"><h3>Введите номер заказа на обработку:</h3></label>
-            <input type="number" class="form-control" id="orderToProcess" placeholder="Номер заказа" required min="1">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 10px; margin-bottom: 50px">
-                Забрать себе
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Подтверждение</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Вы действительно хотите взять заказ на обработку?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                            <button type="button" class="btn btn-primary" id="confirmOrderToProcess">Подтвердить</button>
-                        </div>
-                    </div>
-                </div>
+        <div  id="orderPicker" class="col-sm" style="margin-top: 100px;">
+            <div id="orderPicker2" style="position:fixed; background-color: #FFF2CD; height: 180px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding: 10px">
+                <label for="orderToProcess"><h3>Введите номер заказа на обработку:</h3></label>
+                <input type="number" class="form-control" id="orderToProcess" placeholder="Номер заказа" required min="1">
+                <!-- Button trigger modal -->
+                <button type="button" id="confirmOrderToProcess" class="btn btn-primary" data-toggle="modal" style="margin-top: 10px; margin-bottom: 50px">
+                    Забрать себе
+                </button>
             </div>
         </div>
     </div>

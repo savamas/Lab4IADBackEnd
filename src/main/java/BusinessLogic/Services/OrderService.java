@@ -10,8 +10,11 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import static javax.ejb.TransactionAttributeType.REQUIRED;
 
@@ -45,7 +48,17 @@ public class OrderService {
 
         OrderEnt ord = entityManager.find(order.getClass(), order.getId());
         ord.setDeliveryStatus(status);
+        Date date = new Date();
+        if(status.equals("Завершено"))
+            ord.setDateReceived(date);
 
+    }
+
+    public List<OrderItem> getBookedLocations(){
+        Date date = new Date();
+        Query q = entityManager.createQuery("select e from OrderItem e where e.startDate > :today");
+        q.setParameter("today",date, TemporalType.DATE);
+        return q.getResultList();
     }
 
     public void setPaymentStatus(String status, OrderEnt order){
@@ -78,7 +91,7 @@ public class OrderService {
 
     public Collection<OrderEnt> getUnclaimedOrders(){
 
-        return (Collection<OrderEnt>) entityManager.createQuery("select e from OrderEnt e where (e.courier IS NULL)  AND ((e.status <> 'Completed')OR (e.status is null ))").getResultList();
+        return (Collection<OrderEnt>) entityManager.createQuery("select e from OrderEnt e where (e.courier IS NULL)  AND ((e.deliveryStatus <> 'Завершено')OR (e.status is null ))").getResultList();
 
     }
 
@@ -90,7 +103,7 @@ public class OrderService {
 
     public Collection<OrderEnt> getActiveOrders(int id){
 
-        return (Collection<OrderEnt>) entityManager.createQuery("select e from OrderEnt e where ((e.status <> 'Completed')OR (e.status is null )) AND e.courier.person.Id = "+id).getResultList();
+        return (Collection<OrderEnt>) entityManager.createQuery("select e from OrderEnt e where ((e.deliveryStatus <> 'Завершено')OR (e.status is null )) AND e.courier.person.Id = "+id).getResultList();
 
     }
 

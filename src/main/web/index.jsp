@@ -9,7 +9,7 @@
     <script type="text/javascript" src="resources/js/index.js"></script>
 </head>
 <body style="background-color: #FFF6F5">
-<nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
+<nav class="navbar fixed-top navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large;">
     <a class="navbar-brand" href="index.jsp">
         <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
     </a>
@@ -37,8 +37,8 @@
     </div>
 </nav>
 
-<div class="media">
-    <img class="mr-3" src="d34f9b172e3bc0171ace8b1ae2150763.jpg" alt="Generic placeholder image" width="600" style="margin: 20px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div class="media" style="margin-top: 75px">
+    <img class="mr-3" src="d34f9b172e3bc0171ace8b1ae2150763.jpg" alt="Generic placeholder image" width="600" style="margin: 20px; border-radius: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="media-body" style="margin: 20px">
         <h1 class="mt-0">Выдержка</h1>
         <p style="font-size: x-large; font-style: oblique">Один из главных флагманских магазинов по продаже и предоставлению в аренду фото/видео оборудования, а также аренды локаций. Именно здесь вы сможете выбрать понравившийся вам пейзаж и запечалеть долгожданный момент!</p>
@@ -50,11 +50,11 @@
         <h1 class="mt-0 mb-1">Только у нас!</h1>
         <p style="font-size: x-large; font-style: oblique"> Постоянные акции и спецпредложения, от которых вы не сможете отказаться. Штативы, подставки, звуковое и операторское оборудование прямиком из Германии!</p>
     </div>
-    <img class="ml-3" src="027981ec990f556d8370a14e3e774061_L.jpg" alt="Generic placeholder image" style="margin: 20px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <img class="ml-3" src="027981ec990f556d8370a14e3e774061_L.jpg" alt="Generic placeholder image" style="margin: 20px; border-radius: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 </div>
 
 <div class="media">
-    <img class="mr-3" src="semejnye-traditsii-tsennosti.jpg" alt="Generic placeholder image" style="margin: 20px; border-radius: 9px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <img class="mr-3" src="semejnye-traditsii-tsennosti.jpg" alt="Generic placeholder image" style="margin: 20px; border-radius: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="media-body" style="margin: 20px">
         <h1 class="mt-0">Лучшие локации в России!</h1>
         <p style="font-size: x-large; font-style: oblique">Работают в нашей компании исключительно профессионалы, мастера своего дела. Они не остановятся пока вы не будете полностью довольны своим фото!</p>

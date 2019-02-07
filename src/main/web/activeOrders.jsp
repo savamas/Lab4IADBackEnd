@@ -19,7 +19,7 @@
 </head>
 <body style="background-color: #FFF6F5">
 
-<nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
+<nav class="navbar fixed-top navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
     <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,29 +42,31 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm" style="margin-top: 10px">
+        <div class="col-sm" style="margin-top: 90px">
             <div class="list-group" id="activeOrders">
             </div>
         </div>
-        <div class="col-sm" style="margin-top: 20px; background-color: #FFF2CD; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); height: 400px; padding: 10px;" id="orderToPick">
-            <label for="orderToChange"><h3>Введите номер заказа для изменения статуса:</h3></label>
-            <input type="number" class="form-control" id="orderToChange" placeholder="Номер заказа" required min="1" style="margin-bottom: 10px">
-            <label for="payment"><h3>Укажите новый статус оплаты: </h3></label>
-            <select id="payment" class="form-control" style="margin-bottom: 10px">
-                <option>Оплачен</option>
-                <option>Не оплачен</option>
-            </select>
-            <label for="delivery"><h3>Укажите новый статус доставки: </h3></label>
-            <select id="delivery" class="form-control" style="margin-bottom: 10px">
-                <option>В обработке</option>
-                <option>Собирается</option>
-                <option>Готово к доставке</option>
-                <option>Готово к выдаче</option>
-                <option>Завершено</option>
-            </select>
-            <button type="button" id="changeInit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 40px">
-                Изменить
-            </button>
+        <div class="col-sm" style=" margin-top: 100px;" id="orderToPick">
+            <div id="orderToPick2" style="position:fixed; background-color: #FFF2CD; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); height: 400px; padding: 10px;">
+                <label for="orderToChange"><h3>Введите номер заказа для изменения статуса:</h3></label>
+                <input type="number" class="form-control" id="orderToChange" placeholder="Номер заказа" required min="1" style="margin-bottom: 10px">
+                <label for="payment"><h3>Укажите новый статус оплаты: </h3></label>
+                <select id="payment" class="form-control" style="margin-bottom: 10px">
+                    <option>Оплачен</option>
+                    <option>Не оплачен</option>
+                </select>
+                <label for="delivery"><h3>Укажите новый статус доставки: </h3></label>
+                <select id="delivery" class="form-control" style="margin-bottom: 10px">
+                    <option>В обработке</option>
+                    <option>Собирается</option>
+                    <option>Готово к доставке</option>
+                    <option>Готово к выдаче</option>
+                    <option>Завершено</option>
+                </select>
+                <button type="button" id="changeInit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 70px">
+                    Изменить
+                </button>
+            </div>
         </div>
     </div>
 </div>

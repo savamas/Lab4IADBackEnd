@@ -19,7 +19,7 @@
     <script type="text/javascript" src="resources/js/cart.js"></script>
 </head>
 <body style="background-color: #FFF6F5">
-<nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
+<nav class="navbar fixed-top navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
     <a class="navbar-brand" href="index.jsp">
         <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
     </a>
@@ -48,7 +48,7 @@
 
 <%--<div class="container" style="margin: auto;">--%>
     <%--<div class="row">--%>
-        <div id="cartConfirmButton" style="margin-left: 36%;">
+        <div id="cartConfirmButton" style="margin-left: 36%; margin-top: 100px">
             <ul class="list-unstyled" id="itemsInCart">
             </ul>
         </div>

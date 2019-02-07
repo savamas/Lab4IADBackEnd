@@ -5,11 +5,11 @@ $('document').ready(function () {
         contentType: "application/json; charset=utf-8",
     })
         .done(function (data) {
-                $('#personInfo').append('<div class="card" style="width: 500px; text-align: center; background-color: #FFF2CD;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
+                $('#personInfo').append('<div class="card" style="position: fixed; width: 500px; text-align: center; background-color: #FFF2CD;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '                <div class="card-body">\n' +
                     '                    <h2 class="card-title">' + data.firstName + ' ' + data.lastName + '</h2>\n' +
                     '                    <hr>\n' +
-                    '                    <p class="card-text" style="font-size: x-large">Почта: ' + data.username + '<br> Телефон: ' + data.phoneNum + '</p>\n' +
+                    '                    <p class="card-text" style="font-size: x-large">Почта: ' + data.username + '<br> Телефон: ' + data.phoneNum + '<br> Пол: ' + data.sex + '</p>\n' +
                     '                    <button type="button" class="btn btn-danger" onclick="leaveAccount()" style="margin: 20px; text-align: center">Выйти</button>\n' +
                     '                </div>\n' +
                     '            </div>');

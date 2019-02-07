@@ -39,7 +39,7 @@ $('document').ready(function () {
                 }
             } else {
                 $("#wholePage").empty();
-                $("#wholePage").append('<div class="jumbotron" style="background-color: #FFF2CD; margin-top: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
+                $("#wholePage").append('<div class="jumbotron" style="background-color: #FFF2CD; margin-top: 90px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">\n' +
                     '  <h1 class="display-4">Ожидайте!</h1>\n' +
                     '  <p class="lead" style="font-size: x-large">В данный момент заказов на обработку не поступало.</p>\n' +
                     '  <hr class="my-4">\n' +
@@ -88,7 +88,7 @@ $('document').ready(function () {
         }
 
         if (tmp == dataToSave.length) {
-            $("#orderPicker").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
+            $("#orderPicker2").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
                 "  Неправильно выбран номер заказа!\n" +
                 "</div>");
         }

@@ -16,7 +16,7 @@
 </head>
 <body style="background-color: #FFF6F5">
 
-<nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
+<nav class="navbar fixed-top navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
     <a class="navbar-brand" href="index.jsp">
         <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
     </a>
@@ -49,11 +49,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md" style="margin-left: auto; margin-top: 30px">
+        <div class="col-md" style="margin-left: auto; margin-top: 95px">
             <div id="listOfFilters"></div>
             <button type="button" class="btn btn-success" id="filter" style="margin-left: 177px; text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Отфильтровать</button>
         </div>
-        <div class="col-md" style="margin-top: 20px;">
+        <div class="col-md" style="margin-top: 85px;">
             <ul class="list-inline" id="filteredItems">
             </ul>
         </div>

@@ -51,7 +51,7 @@ $('document').ready(function () {
         if (isGood == true) {
             confirmChange();
         } else {
-            $("#orderToPick").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
+            $("#orderToPick2").append("<div class=\"alert alert-danger\" role=\"alert\">\n" +
                 "  Неправильно выбран номер заказа!\n" +
                 "</div>");
         }

@@ -1,5 +1,6 @@
 $('document').ready(function () {
     bum = [];
+    dateH = new Date();
 
     if (window.localStorage.getItem('token') !== null) {
         document.getElementById('onlyForLoggedUsers').innerHTML = "<a class=\"nav-link\" href=\"account.jsp\" style=\"color: #F3ECD6; font-family: Rockwell; font-size: 25px;\">Личный кабинет</a>";
@@ -30,6 +31,8 @@ $('document').ready(function () {
                     success: function (bookedDates) {
                         for (i = 0; i < bookedDates.length; i++){
                             bum[i] = moment(bookedDates[i]);
+                            dateH = new Date();
+                            dateH.setDate(dateH.getDate()-1);
                           //  alert(bookedDates[i]);
                         }
 
@@ -53,7 +56,7 @@ $('document').ready(function () {
                             // '                }\n' +
                             '                $(\'#datetimepicker4\').datetimepicker({\n' +
                             '                    format: \'L\',\n' +
-                            '                    disabledDates: bum\n' +
+                            '                    disabledDates: bum, minDate: dateH\n' +
                             '                });\n' +
                             '            });\n' +
                             '        </script>\n' +

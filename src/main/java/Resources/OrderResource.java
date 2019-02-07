@@ -50,7 +50,7 @@ public class OrderResource {
     @POST
     @JWTTokenNeeded
     @Path("/setStatus")
-    public Response setStatuses(String content){
+    public Response setStatuses(String content, @Context HttpServletRequest request){
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         JsonElement elem = jsonParser.parse(content);
@@ -77,8 +77,9 @@ public class OrderResource {
             needUpdates = true;
         }
 
+
         //if(needUpdates)
-          //  mailService.sendUpdate(ord, newDeliveryStatus, newPaymentStatus);
+          //  mailService.sendUpdate(ord, newDeliveryStatus, newPaymentStatus, request);
 
         return Response.ok().build();
     }
@@ -136,7 +137,7 @@ public class OrderResource {
 
     @POST
     @Path("/addToCart")
-    public Response setStatuses(String content, @Context HttpServletRequest request){
+    public Response addToCart(String content, @Context HttpServletRequest request){
 
 
 
@@ -174,6 +175,12 @@ public class OrderResource {
 try {
     newDate = oldDateFormat.parse(oldDate);
 }catch (Exception e){ }
+
+        List<OrderItem> checkItems = orderService.getBookedLocations();
+        for (OrderItem checkItem: checkItems) {
+            if(checkItem.getStartDate().equals(newDate))
+                return Response.ok().entity(gson.toJson("Date already booked")).build();
+        }
 
         addition.setStartDate(newDate);
         List<OrderItem> newItems = (LinkedList<OrderItem>)session.getAttribute("items");
@@ -217,7 +224,10 @@ try {
 
         List<OrderItem> items = (List<OrderItem>)session.getAttribute("items");
         List<OrderItemDTO> dtos = new LinkedList<>();
+
         for (OrderItem item : items) {
+
+
             OrderItemDTO dto = new OrderItemDTO();
             Calendar cal = Calendar.getInstance();
             cal.setTime(item.getStartDate());

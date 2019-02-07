@@ -11,7 +11,7 @@
 </head>
 <body style="background-color: #FFF6F5">
 
-<nav class="navbar navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
+<nav class="navbar fixed-top navbar-expand navbar-light" style="background-color: #AF734E; font-size: x-large">
     <a class="navbar-brand" href="index.jsp">
         <img src="Logo.svg" width="50" height="50" class="d-inline-block align-top" alt="zz">
     </a>
@@ -38,10 +38,13 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm" id="personInfo" style="margin-top: 20px">
+        <div class="col-sm" id="personInfo" style="margin-top: 100px;">
+            <%--<div style="position: fixed">--%>
+
+            <%--</div>--%>
         </div>
         <div class="col-sm">
-            <div class="list-group" id="personOrders" style="margin-top: 10px">
+            <div class="list-group" id="personOrders" style="margin-top: 90px">
             </div>
         </div>
     </div>
